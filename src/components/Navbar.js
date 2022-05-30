@@ -19,6 +19,7 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
 const services = [
+  
   {
     name: 'Objectives',
     description: 'Get a better understanding of where your traffic is coming from.',
@@ -31,6 +32,34 @@ const services = [
     description: 'lorem',
     href: '#',
     icon: RefreshIcon,
+  },
+]
+const navItem = [
+  {
+    name: 'Abouts',
+    description: 'Get a better understanding of where your traffic is coming from.',
+    href: '#',
+    icon: ChartBarIcon,
+  },
+
+  {
+    name: 'Docs',
+    description: 'lorem',
+    href: '#',
+    icon: ChartBarIcon,
+  },
+  {
+    name: 'Abouts',
+    description: 'Get a better understanding of where your traffic is coming from.',
+    href: '#',
+    icon: ChartBarIcon,
+  },
+
+  {
+    name: 'Docs',
+    description: 'lorem',
+    href: '#',
+    icon: ChartBarIcon,
   },
 ]
 const callsToAction = [
@@ -254,13 +283,13 @@ export default function Example() {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <Popover.Panel focus className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+        <Popover.Panel focus className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-20" >
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
-            <div className="pt-5 pb-6 px-5">
-              <div className="flex items-center justify-between">
-                <div>
+            <div className="pt-5 pb-6 px-5 ">
+              <div className="flex  items-center justify-between">
+                <div >
                   <img
-                    className="h-8 w-auto"
+                    className="h-9 w-auto"
                     src={logo}
                     alt="logo"
                   />
@@ -273,8 +302,8 @@ export default function Example() {
                 </div>
               </div>
               <div className="mt-6">
-                {/* <nav className="grid gap-y-8">
-                  {services.map((item) => (
+                <nav className="grid gap-y-8 align-middle grid-cols-1">
+                  {navItem.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
@@ -284,17 +313,13 @@ export default function Example() {
                       <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
                     </a>
                   ))}
-                </nav> */}
+                </nav>
               </div>
             </div>
             <div className="py-6 px-5 space-y-6">
-              <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+              <div className="grid grid-cols-1 gap-y-4 gap-x-8">
                 <a href="#" className="text-base font-medium text-gray-900 hover:text-indigo-800">
                   About
-                </a>
-
-                <a href="#" className="text-base font-medium text-gray-900 hover:text-indigo-800">
-                  Blogs
                 </a>
                 {resources.map((item) => (
                   <a
