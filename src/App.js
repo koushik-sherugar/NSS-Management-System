@@ -6,7 +6,7 @@ import Signin from "./pages/Signin"
 import Login from "./pages/Login"
 import Admin from "./pages/Admin"
 import Footer from "./components/Footer"
-import Features from "./pages/Features"
+
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />} exact />
         <Route path="/signup" element={<Signin />} exact />
         <Route path="/login" element={<Login />} exact />
-        <Route path="/features" element={<Features />} exact />
+
         <Route path="/admin" element={<Admin />} exact />
       </Routes>
       <Footer />

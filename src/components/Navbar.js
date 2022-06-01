@@ -19,7 +19,7 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
 const services = [
-  
+
   {
     name: 'Objectives',
     description: 'Get a better understanding of where your traffic is coming from.',
@@ -261,14 +261,22 @@ export default function Example() {
             </Popover>
           </Popover.Group>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            {/* <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-              about
+            {/* <a href="#" className="whitespace-nowrap text-base font-medium text-gray-400 px-4 py-2 hover:text-gray-900  border border-transparent rounded-md bg-gray-100 hover:bg-gray-300 shadow-sm">
+              Login
             </a> */}
+            <div className="ml-3 inline-flex rounded-md shadow">
+              <a
+                href="#"
+                className="inline-flex items-center justify-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
+              >
+                Login
+              </a>
+            </div>
             <a
               href="#"
               className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-800 hover:bg-indigo-700"
             >
-              Get started
+              Register Now
             </a>
           </div>
         </div>
