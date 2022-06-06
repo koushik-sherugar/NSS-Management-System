@@ -96,11 +96,11 @@ const Footer = () => {
                     </div>
                     <div className="px-4 sm:w-1/3 md:w-1/4 mt-4 md:mt-0">
                         <h6 className="font-bold mb-2">koushik sheru</h6>
-                        <p className="mb-4 text-sm">Use our HTML blocks for <strong>FREE</strong>
-                            <em>All are License</em></p>
+                        <p className="mb-4 text-sm">sample text  blocks for <strong>koushik</strong>
+                            <em>text here</em></p>
                     </div>
                     <div className="px-4 md:w-1/4 md:ml-auto mt-6 sm:mt-4 md:mt-0">
-                        <button className="px-4 py-2 bg-purple-800 hover:bg-purple-900 rounded text-white">Get Started</button>
+                        <button className="px-4 py-2 bg-indigo-800 hover:bg-indigo-700 rounded text-white">Get Started</button>
                     </div>
                 </div>
                 <div className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
