@@ -225,6 +225,23 @@ export default function Login() {
 
                     {/* *************************************************************************** */}
                     <div className="grid grid-cols-6 gap-6">
+                      <div className="col-span-6">
+                        <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
+                          Street address
+                        </label>
+                        <div className="mt-1">
+                          <textarea
+                            id="address"
+                            name="address"
+                            rows={3}
+                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                            placeholder=" 
+                             enter your address"
+                            defaultValue={''}
+                          />
+
+                        </div>
+                      </div>
                       <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                         <label htmlFor="city" className=" block text-sm font-medium text-gray-700">
                           City
@@ -493,18 +510,21 @@ export default function Login() {
                       </div>
 
                       <div className="col-span-6">
-                        <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
-                          Street address
-                        </label>
-                        <input
-                          type="text"
-                          name="street-address"
-                          id="street-address"
-                          autoComplete="street-address"
-                          className="pl-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
+                        <label htmlFor="achievements" className="block text-sm font-medium text-gray-700">
+                          Achievements                        </label>
+                        <div className="mt-1">
+                          <textarea
+                            id="achievements"
+                            name="achievements"
+                            rows={3}
+                            className="shadow-sm ml-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                            placeholder="  enter the honours and awards won by you"
+                            defaultValue={''}
+                          />
 
+                        </div>
+
+                      </div>
 
 
                     </div>
