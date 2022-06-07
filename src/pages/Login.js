@@ -152,19 +152,7 @@ export default function Login() {
                         />
                       </div>
 
-                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label htmlFor="register-no" className="block text-sm font-medium text-gray-700">
-                          Register Number
-                        </label>
-                        <input
-                          type="number"
-                          name="register-no"
-                          id="register-no"
-                          autoComplete="register-no"
-                          className="mt-1 pl-2
-                          focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                        />
-                      </div>
+
 
 
                     </div>
@@ -290,24 +278,6 @@ export default function Login() {
 
                     {/* *************************************************************************** */}
 
-                    {/* <div>
-                      <label htmlFor="about" className="block text-sm font-medium text-gray-700">
-                        About
-                      </label>
-                      <div className="mt-1">
-                        <textarea
-                          id="about"
-                          name="about"
-                          rows={3}
-                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                          placeholder="you@example.com"
-                          defaultValue={''}
-                        />
-                      </div>
-                      <p className="mt-2 text-sm text-gray-500">
-                        Brief description for your profile. URLs are hyperlinked.
-                      </p>
-                    </div> */}
 
                     {/* <div className="grid grid-cols-3 gap-6">
                             <div className="col-span-3 sm:col-span-2">
@@ -432,7 +402,19 @@ export default function Login() {
                         />
                       </div>
 
-
+                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                        <label htmlFor="register-no" className="block text-sm font-medium text-gray-700">
+                          Register Number
+                        </label>
+                        <input
+                          type="number"
+                          name="register-no"
+                          id="register-no"
+                          autoComplete="register-no"
+                          className="mt-1 pl-2
+                          focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
+                        />
+                      </div>
 
                       <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                         <label htmlFor="city" className=" block text-sm font-medium text-gray-700">
@@ -531,7 +513,7 @@ export default function Login() {
                   </div>
 
                 </div>
-                <div>
+                {/* <div>
                   <label className=" mt-3 block text-sm font-medium text-gray-700">Upload your college Id card</label>
                   <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                     <div className="space-y-1 text-center">
@@ -562,14 +544,14 @@ export default function Login() {
                       <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 
 
           </div>
 
-          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 justify-center">
             <button
               type="submit"
               className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
