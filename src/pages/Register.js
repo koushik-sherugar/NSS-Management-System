@@ -1,54 +1,87 @@
-import React, { useState } from 'react'
+import axios from "axios";
+import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
+const Register = (props) => {
+  let history = useNavigate();
+  const [data, setData] = useState({
+    first_name: "",
+    last_name: "",
+    parent_name: "",
+    aadhar_no: "",
+    email_id: "",
+    gender: "",
+    blood_group: "",
+    dob: "",
+    mob_no: "",
+    category: "",
+    street_address: "",
+    city: "",
+    postal_code: "",
+    state: "",
+    // image: "",
 
-const Register = () => {
+    university_name: "",
+    college_name: "",
+    course: "",
+    register_no: "",
+    interests: "",
+    achievements: "",
+  });
 
-  const [data, setData]= useState({
-    first_name:"",
-    last_name:"",
-    parent_name:"",
-    aadhar_no:"",
-    email_id:"",
-    gender:"",
-    blood_group:"",
-    dob:"",
-    mob_no:"",
-    category:"",
-    street_address:"",
-    city:"",
-    postal_code:"",
-    state:"",
-    image:"",
-  
-  
-    university_name:"",
-    college_name:"",
-    program:"",
-    course:"",
-    register_no:"",
-    c_city:"",
-    c_postal_code:"",
-    c_state:"",
-    achievements:"",
-  
-  
-  
-  })
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+    // console.log(data);
+  };
 
-  const handleChange =(e)=>{
-    setData({...data,[e.target.name]: e.target.value});
-  }
-    return (
-        <>
-            
-      <form action="#" method="POST">
+  const submitForm = (e) => {
+    e.preventDefault();
+    const sendData = {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      parent_name: data.parent_name,
+      aadhar_no: data.aadhar_no,
+      email_id: data.email_id,
+      gender: data.gender,
+      blood_group: data.blood_group,
+      dob: data.dob,
+      mob_no: data.mob_no,
+      category: data.category,
+      street_address: data.street_address,
+      city: data.city,
+      postal_code: data.postal_code,
+      state: data.state,
+      // image: data.image,
+
+      university_name: data.university_name,
+      college_name: data.college_name,
+      course: data.college_name,
+      register_no: data.register_no,
+      interests: data.interests,
+      achievements: data.achievements,
+    };
+    console.log(sendData);
+    axios.post("hhtp", sendData).then((result) => {
+      if (result.data.Status == "Invalid") {
+        alert("invalid user");
+      } else {
+        // props.history.push('/dashboard')
+        history("/dashboard");
+      }
+    });
+  };
+
+  return (
+    <>
+      <form onSubmit={submitForm} action="#" method="POST">
         <div className="form container mx-auto px-4 mt-4">
-          <div >
-
+          <div>
             <div className="md:grid md:grid-cols-3 md:gap-6">
               <div className="md:col-span-1">
                 <div className="px-4 sm:px-0">
-                  <h3 className="text-lg font-medium leading-6 capitalize text-gray-900">Profile</h3>
+                  <h3 className="text-lg font-medium leading-6 capitalize text-gray-900">
+                    Profile
+                  </h3>
                   <p className="mt-1 text-sm text-gray-600">
                     Enter your personal details here.
                   </p>
@@ -60,7 +93,10 @@ const Register = () => {
                   <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
                       <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="first_name" className=" after:content-['*'] after:ml-0.5 after:text-red-500  block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="first_name"
+                          className=" after:content-['*'] after:ml-0.5 after:text-red-500  block text-sm font-medium text-gray-700"
+                        >
                           First name
                         </label>
                         <input
@@ -69,21 +105,26 @@ const Register = () => {
                           id="first-name"
                           autoComplete="given-name"
                           className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                          onChange={handleChange} value={data.first_name}
+                          onChange={handleChange}
+                          value={data.first_name}
                         />
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="last_name" className=" after:content-['*'] after:ml-0.5 after:text-red-500  block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="last_name"
+                          className=" after:content-['*'] after:ml-0.5 after:text-red-500  block text-sm font-medium text-gray-700"
+                        >
                           Last Name
                         </label>
                         <input
                           type="text"
                           name="last_name"
                           id="last-name"
-                          autoComplete="family-name"
+                          autoComplete="last_name"
                           className="pl-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          onChange={handleChange} value={data.last_name}
+                          onChange={handleChange}
+                          value={data.last_name}
                         />
                       </div>
                     </div>
@@ -91,25 +132,29 @@ const Register = () => {
                     {/* //parents */}
 
                     <div className="grid grid-cols-6 gap-6">
-
-
                       <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <label htmlFor="parent_name" className=" block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="parent_name"
+                          className=" block text-sm font-medium text-gray-700"
+                        >
                           Parents/Gardian Name
                         </label>
                         <input
                           type="text"
                           name="parent_name"
                           id="parent-name"
-                          autoComplete="parent-name"
+                          autoComplete="parent_name"
                           className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                          onChange={handleChange} value={data.parent_name}
-
+                          onChange={handleChange}
+                          value={data.parent_name}
                         />
                       </div>
 
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label htmlFor="aadhar_no" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="aadhar_no"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           Aadhar Number
                         </label>
                         <input
@@ -117,27 +162,31 @@ const Register = () => {
                           name="aadhar_no"
                           id="aadhar-no"
                           autoComplete="aadhar_no"
+                          min="0"
+                          oninput="this.value = Math.abs(this.value)"
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          onChange={handleChange} value={data.aadhar_no}
-
+                          onChange={handleChange}
+                          value={data.aadhar_no}
                         />
                       </div>
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label htmlFor="email_id" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="email_id"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           Email
                         </label>
-
 
                         <input
                           type="email"
                           name="email_id"
                           id="email-id"
-                          autoComplete="email"
+                          autoComplete="email_id"
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          onChange={handleChange} value={data.email_id}
-
+                          onChange={handleChange}
+                          value={data.email_id}
                         />
                       </div>
 
@@ -154,15 +203,16 @@ const Register = () => {
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
                         />
                       </div> */}
-
-
                     </div>
 
                     {/* ********** */}
 
                     <div className="grid grid-cols-6 gap-6">
                       <div className="col-span-6 sm:col-span-6 lg:col-span-1">
-                        <label htmlFor="gender" className=" block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="gender"
+                          className=" block text-sm font-medium text-gray-700"
+                        >
                           Gender
                         </label>
                         <select
@@ -170,18 +220,22 @@ const Register = () => {
                           name="gender"
                           autoComplete="gender"
                           className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          onChange={handleChange} value={data.gender}
-
+                          onChange={handleChange}
+                          value={data.gender}
                         >
-                          <option disabled selected value className="w-full">gender</option>
+                          <option disabled selected value className="w-full">
+                            gender
+                          </option>
                           <option>Male</option>
                           <option>Female</option>
                           <option>Others</option>
-
                         </select>
                       </div>
                       <div className="col-span-6 sm:col-span-6 lg:col-span-1">
-                        <label htmlFor="blood_group" className=" block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="blood_group"
+                          className=" block text-sm font-medium text-gray-700"
+                        >
                           Blood group
                         </label>
                         <select
@@ -189,9 +243,12 @@ const Register = () => {
                           name="blood_group"
                           autoComplete="blood_group"
                           className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          onChange={handleChange} value={data.blood_group}
+                          onChange={handleChange}
+                          value={data.blood_group}
                         >
-                          <option disabled selected value  >select blood group</option>
+                          <option disabled selected value>
+                            select blood group
+                          </option>
                           <option>A+</option>
                           <option>A-</option>
                           <option>B+</option>
@@ -204,21 +261,27 @@ const Register = () => {
                       </div>
 
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label htmlFor="dob" className="block text-sm font-medium text-gray-700 ">
+                        <label
+                          htmlFor="dob"
+                          className="block text-sm font-medium text-gray-700 "
+                        >
                           Date of birth
                         </label>
                         <input
                           type="date"
                           name="dob"
                           id="dob"
-
                           className="mt-1 pl-2 lg:text-lg sm:text-md text-gray-500
                            focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm  sm:text-sm border border-gray-300 rounded-md"
-                           onChange={handleChange} value={data.dob}
+                          onChange={handleChange}
+                          value={data.dob}
                         />
                       </div>
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label htmlFor="mob_no" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="mob_no"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           Mobile no
                         </label>
                         <input
@@ -226,20 +289,23 @@ const Register = () => {
                           name="mob_no"
                           id="mob-no"
                           autoComplete="mob_no"
+                          min="0"
+                          oninput="this.value = Math.abs(this.value)"
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          onChange={handleChange} value={data.mob_no}
+                          onChange={handleChange}
+                          value={data.mob_no}
                         />
                       </div>
-
-
-
                     </div>
                     {/* ****************************** */}
 
                     <div className="grid grid-cols-6 gap-6">
                       <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <label htmlFor="category" className=" block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="category"
+                          className=" block text-sm font-medium text-gray-700"
+                        >
                           Category (As mentioned by KEA)
                         </label>
                         <select
@@ -247,14 +313,16 @@ const Register = () => {
                           name="category"
                           autoComplete="category"
                           className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          onChange={handleChange} value={data.category}
+                          onChange={handleChange}
+                          value={data.category}
                         >
-                          <option disabled selected value >select category</option>
+                          <option disabled selected value>
+                            select category
+                          </option>
                           <option>2A</option>
                           <option>SC</option>
                           <option>ST</option>
                           <option>OBC</option>
-                      
                         </select>
                       </div>
 
@@ -271,17 +339,15 @@ const Register = () => {
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
                         />
                       </div> */}
-
-                      
-
-                      
-
                     </div>
 
                     {/* *************************************************************************** */}
                     <div className="grid grid-cols-6 gap-6">
                       <div className="col-span-6">
-                        <label htmlFor="street_address" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="street_address"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           Street address
                         </label>
                         <div className="mt-1">
@@ -292,13 +358,16 @@ const Register = () => {
                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                             placeholder=" 
                              enter your address"
-                             onChange={handleChange} value={data.street_address}
+                            onChange={handleChange}
+                            value={data.street_address}
                           />
-
                         </div>
                       </div>
                       <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <label htmlFor="city" className=" block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="city"
+                          className=" block text-sm font-medium text-gray-700"
+                        >
                           City
                         </label>
                         <input
@@ -308,30 +377,37 @@ const Register = () => {
                           autoComplete="city"
                           className="mt-1 pl-2
                            focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                           onChange={handleChange} value={data.city}
+                          onChange={handleChange}
+                          value={data.city}
                         />
                       </div>
 
-                      
-
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label htmlFor="postal_code" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="postal_code"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           ZIP / Postal code
                         </label>
 
-
                         <input
-                          type="text"
+                          type="number"
                           name="postal_code"
                           id="postal-code"
                           autoComplete="postal_code"
+                          min="0"
+                          oninput="this.value = Math.abs(this.value)"
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          onChange={handleChange} value={data.postal_code}
+                          onChange={handleChange}
+                          value={data.postal_code}
                         />
                       </div>
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label htmlFor="state" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="state"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           State / Province
                         </label>
                         <select
@@ -339,9 +415,12 @@ const Register = () => {
                           name="state"
                           autoComplete="state"
                           className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          onChange={handleChange} value={data.state}
+                          onChange={handleChange}
+                          value={data.state}
                         >
-                          <option disabled selected value  >select state</option>
+                          <option disabled selected value>
+                            select state
+                          </option>
                           <option>Karnataka</option>
                           <option>Maharashtra</option>
                           <option>Delhi</option>
@@ -350,7 +429,6 @@ const Register = () => {
                     </div>
 
                     {/* *************************************************************************** */}
-
 
                     {/* <div className="grid grid-cols-3 gap-6">
                             <div className="col-span-3 sm:col-span-2">
@@ -372,10 +450,16 @@ const Register = () => {
                             </div>
                           </div> */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Photo</label>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Photo
+                      </label>
                       <div className="mt-1 flex items-center">
                         <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                          <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                          <svg
+                            className="h-full w-full text-gray-300"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
                             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                           </svg>
                         </span>
@@ -385,23 +469,28 @@ const Register = () => {
                           onChange={handleChange} value={data.image}
                         >
                           Select Image
-                        </button> */}
+                        </button> 
+                         */}
                         <div className="flex text-sm text-gray-600">
-                        <label
-                          htmlFor="file-upload"
-                          className="ml-5  bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                          <span>Upload a file</span>
-                          <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                        </label>
-                      </div>
+                          <label
+                            htmlFor="image_upload"
+                            className="ml-5  bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                          >
+                            <span>Upload a file</span>
+                            <input
+                              id="image-upload"
+                              name="image_upload"
+                              type="file"
+                              // onChange={handleChange}
+                              // value={data.image_upload}
+                              className="sr-only"
+                            />
+                          </label>
+                        </div>
                       </div>
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
             </div>
           </div>
@@ -423,18 +512,23 @@ const Register = () => {
             <div className="md:grid md:grid-cols-3 md:gap-6">
               <div className="md:col-span-1">
                 <div className="px-4 sm:px-0">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">College details</h3>
-                  <p className="mt-1 text-sm text-gray-600">Enter your college details.</p>
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    College details
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-600">
+                    Enter your college details.
+                  </p>
                 </div>
               </div>
               <div className="mt-5 md:mt-0 md:col-span-2">
-
                 <div className="shadow overflow-hidden sm:rounded-md">
                   <div className="px-4 py-5 bg-white sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
-
                       <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="university_name" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="university_name"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           University / Institution
                         </label>
                         <input
@@ -443,12 +537,16 @@ const Register = () => {
                           id="uni-name"
                           autoComplete="university_name"
                           className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                          onChange={handleChange} value={data.university_name}
+                          onChange={handleChange}
+                          value={data.university_name}
                         />
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="college_name" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="college_name"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           college name
                         </label>
                         <input
@@ -457,7 +555,8 @@ const Register = () => {
                           id="college-name"
                           autoComplete="college_name"
                           className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                          onChange={handleChange} value={data.college_name}
+                          onChange={handleChange}
+                          value={data.college_name}
                         />
                       </div>
 
@@ -475,7 +574,10 @@ const Register = () => {
                       </div> */}
 
                       <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="college-name" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="college-name"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           Course
                         </label>
                         <input
@@ -488,14 +590,21 @@ const Register = () => {
                       </div>
 
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label htmlFor="register-no" className="block text-sm font-medium text-gray-700">
+                        <label
+                          htmlFor="register_no"
+                          className="block text-sm font-medium text-gray-700"
+                        >
                           Register Number
                         </label>
                         <input
                           type="number"
-                          name="register-no"
-                          id="register-no"
-                          autoComplete="register-no"
+                          name="register_no"
+                          min="0"
+                          oninput="this.value = Math.abs(this.value)"
+                          id="register_no"
+                          autoComplete="register_no"
+                          onChange={handleChange}
+                          value={data.register_no}
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
                         />
@@ -546,11 +655,6 @@ const Register = () => {
                         </select>
                       </div> */}
 
-
-
-
-                      
-
                       {/* <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                           Country
@@ -568,43 +672,46 @@ const Register = () => {
                       </div> */}
 
                       <div className="col-span-6">
-                        <label htmlFor="interests" className="block text-sm font-medium text-gray-700">
-                          Interests                        </label>
+                        <label
+                          htmlFor="interests"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Interests{" "}
+                        </label>
                         <div className="mt-1">
                           <textarea
                             id="interests"
                             name="interests"
                             rows={2}
+                            onChange={handleChange}
+                            value={data.interests}
                             className="shadow-sm ml-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                             placeholder="  enter your hobbies and the field of interest"
-                            
                           />
-
                         </div>
-
                       </div>
 
                       <div className="col-span-6">
-                        <label htmlFor="achievements" className="block text-sm font-medium text-gray-700">
-                          Achievements                        </label>
+                        <label
+                          htmlFor="achievements"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Achievements{" "}
+                        </label>
                         <div className="mt-1">
                           <textarea
                             id="achievements"
                             name="achievements"
                             rows={3}
+                            onChange={handleChange}
+                            value={data.achievements}
                             className="shadow-sm ml-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                             placeholder="  enter the honours and awards won by you"
-                            
                           />
-
                         </div>
-                        
-
                       </div>
-
                     </div>
                   </div>
-
                 </div>
                 {/* <div>
                   <label className=" mt-3 block text-sm font-medium text-gray-700">Upload your college Id card</label>
@@ -640,11 +747,9 @@ const Register = () => {
                 </div> */}
               </div>
             </div>
-
-
           </div>
 
-          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 justify-center">
+          <div className="px-4 py-3 bg-white text-right sm:px-6 justify-center">
             <button
               type="submit"
               className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -652,8 +757,6 @@ const Register = () => {
               Submit
             </button>
           </div>
-
-
 
           {/* <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -778,9 +881,8 @@ const Register = () => {
       </div>*/}
         </div>
       </form>
-        </>
+    </>
+  );
+};
 
-    )
-}
-
-export default Register
+export default Register;
