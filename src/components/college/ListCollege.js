@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Table from "react-bootstrap/Table";
 
 const ListUniversity = () => {
   const [university, setUniversity] = useState([]);
@@ -13,7 +12,7 @@ const ListUniversity = () => {
 
   function getUniversity() {
     axios
-      .get("http//localhost:80/nss-ms/university/")
+      .get("http://localhost:80/nss-ms/university/save")
       .then(function (response) {
         console.log(response.data);
         setUniversity(response.data);
@@ -22,27 +21,15 @@ const ListUniversity = () => {
   return (
     <>
       <h1>List university</h1>;
-      <Table className="striped bordered hover">
+      <table>
         <thead>
           <tr>
-            <th>id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
           {university.map((officer, key) => (
             <tr key={key}>
               <td>{officer.university_id}</td>
@@ -61,7 +48,7 @@ const ListUniversity = () => {
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
     </>
   );
 };

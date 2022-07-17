@@ -1,0 +1,155 @@
+/* <link rel="stylesheet" href="assets/css/signup.css"> */
+
+.st0 {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 20;
+  stroke-linecap: round;
+  stroke-miterlimit: 3;
+}
+
+/* *********************************** */
+
+body {
+  background-color: #009879;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.signup-menu {
+  background-color: #009879;
+  height: 100%;
+  width: 100%;
+}
+.signup-formbox {
+  font-family: sans-serif;
+  height: 720px;
+  width: 430px;
+  position: relative;
+  margin: 6% auto;
+  background: #fff;
+  padding: 5px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 9px #ff61241f;
+}
+
+#signup-btn {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background: linear-gradient(to right, #009879, #32cd32);
+  border-radius: 30px;
+  transition: 0.5s;
+}
+.signup-input-group {
+  top: 180px;
+  position: absolute;
+  width: 280px;
+  transition: 0.5s;
+}
+.signup-input-field {
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #999;
+  outline: none;
+  background: transparent;
+}
+.signup-submit-btn {
+  width: 85%;
+  padding: 5px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: linear-gradient(to right, #009879, #32cd32);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+}
+.signup-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  position: absolute;
+  top: -55px;
+  left: 160px;
+}
+.signup-form-header {
+  color: #009879;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+h1 {
+  font-family: sans-serif;
+  color: #009ffd;
+}
+
+#login1 {
+  left: 50px;
+}
+#login2 {
+  left: 450px;
+}
+.eye {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 270px;
+  cursor: pointer;
+}
+#hide1 {
+  display: none;
+}
+#hide3 {
+  display: none;
+}
+h1 {
+  font-family: sans-serif;
+  color: #009ffd;
+}
+@media only screen and (max-width: 600px) {
+  .signup-form-header {
+    color: #009879;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 60px;
+  }
+
+  .signup-formbox {
+    font-family: sans-serif;
+    height: 720px;
+    width: 380px;
+    position: relative;
+    margin: 6% auto;
+    background: #fff;
+    padding: 5px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px 9px #ff61241f;
+  }
+  #login1 {
+    left: 25px;
+  }
+  #login2 {
+    left: 25px;
+  }
+  .signup-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    position: absolute;
+    top: -35px;
+    left: 140px;
+  }
+  .signup-input-group {
+    top: 200px;
+    position: absolute;
+    width: 280px;
+    transition: 0.5s;
+  }
+}
