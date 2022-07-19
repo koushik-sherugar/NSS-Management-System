@@ -29,10 +29,12 @@ import EditUniversity from "./components/university/EditUniversity";
 import AddActivity from "./components/activity/AddActivity";
 
 // university
-// import ListCollege from "./components/college/ListCollege";
+import ListCollege from "./components/college/ListCollege";
 import AddCollege from "./components/college/AddCollege";
 // import EditCollege from "./components/college/EditCollege";
 
+//admin
+import AdminLogin from "./components/admin/AdminLogin";
 import Chart from "./components/Chart";
 
 import Table from "./components/Table";
@@ -59,6 +61,7 @@ function App() {
         /> */}
 
         <Route path="/admin" element={<Admin />} exact />
+        <Route path="/adminlogin" element={<AdminLogin />} exact />
         <Route path="/chart" element={<Chart />} exact />
 
         {/* staff */}
@@ -82,7 +85,7 @@ function App() {
         {/* college */}
 
         <Route path="/addcollege/create" element={<AddCollege />} exact />
-        {/* <Route path="/listcollege" element={<ListCollege />} exact /> */}
+        <Route path="/listcollege" element={<ListCollege />} exact />
         {/* <Route path="/editcollege/:id/edit" element={<EditCollege />} exact /> */}
 
         {/* activity */}

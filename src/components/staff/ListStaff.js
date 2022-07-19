@@ -16,8 +16,8 @@ const ListStaff = () => {
             <tr>
               <th>Id</th>
               <th>Name</th>
-              <th>Email</th>
               <th>Contact</th>
+              <th>Email</th>
               <th>Trained</th>
               <th>Training center</th>
               <th>Year</th>
