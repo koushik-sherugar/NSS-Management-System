@@ -1,11 +1,102 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+const initialState = {
+  college_id: "",
+  staff_name: "",
+  contact_no: "",
+  staff_email: "",
+  trained: "",
+  training_center: "",
+  trained_year: "",
+};
 const StaffRegister = () => {
+  const [state, setState] = useState(initialState);
+  const {
+    college_id,
+    staff_name,
+    contact_no,
+    staff_email,
+    trained,
+    training_center,
+    trained_year,
+  } = state;
+
+  const navigate = useNavigate();
+  // const { university_id } = useParams();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!college_id || !staff_name) {
+      toast.error("please enter the values in input");
+    } else {
+      axios
+        .post("http://localhost:5000/api/staffregister", {
+          college_id,
+          staff_name,
+          contact_no,
+          staff_email,
+          trained,
+          training_center,
+          trained_year,
+        })
+        .then(() => {
+          setState({
+            college_id: "",
+            staff_name: "",
+            contact_no: "",
+            staff_email: "",
+            trained: "",
+            training_center: "",
+            trained_year: "",
+          });
+        })
+        .catch((err) => {
+          toast.error(err.response.data);
+        });
+      toast.success("data added sucessfully");
+      // setTimeout(() => navigate("/listuniversity"), 500);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
+  //   const [college_id, setcollege_id] = useState("");
+  //   const [staff_name, setstaff_name] = useState("");
+  //   const [staff_email, setstaff_email] = useState("");
+  //   const [contact_no, setcontact_no] = useState("");
+  //   const [trained, settrained] = useState("");
+  //   const [training_center, settraining_center] = useState("");
+  //   const [trained_year, settrained_year] = useState("");
+
+  // const register = () => {
+  //   console.log(email + "" + name);
+  // };
+  // const register = axios
+  //   .post("http://localhost:5000/api/staffregister", {
+  //     college_id: college_id,
+  //     staff_name: staff_name,
+  //     contact_no: contact_no,
+  //     staff_email: staff_email,
+  //     trained: trained,
+  //     training_center: training_center,
+  //     trained_year: trained_year,
+  //   })
+  //   .then((response) => {
+  //     console.log(response);
+  //   });
   return (
     <div>
-      <div className="w-full bg-grey-lightest pt-5">
+      <div className="w-full bg-gray-100 pt-5">
         <div className="container mx-auto py-8">
-          <div className="w-5/6 lg:w-1/2 mx-auto bg-white rounded shadow">
+          <form
+            onSubmit={handleSubmit}
+            className="w-5/6 lg:w-1/2 mx-auto bg-white rounded shadow"
+          >
             <div className="flex justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -29,27 +120,33 @@ const StaffRegister = () => {
                 <div className="w-1/2 mr-1">
                   <label
                     className="block text-grey-darker text-sm font-bold mb-2"
-                    for="first_name"
+                    for="college_id"
                   >
                     College Id
                   </label>
                   <input
                     className="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
-                    id="first_name"
+                    id="college_id"
+                    name="college_id"
+                    value={college_id}
                     type="number"
                     placeholder="enter college id"
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="w-1/2 ml-1">
                   <label
                     className="block text-grey-darker text-sm font-bold mb-2"
-                    for="last_name"
+                    for="name"
                   >
                     Name
                   </label>
                   <input
                     className="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                     id="name"
+                    name="staff_name"
+                    value={staff_name}
+                    onChange={handleInputChange}
                     type="text"
                     placeholder="enter name"
                   />
@@ -67,6 +164,9 @@ const StaffRegister = () => {
                   className="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                   id="email"
                   type="email"
+                  name="staff_email"
+                  value={staff_email}
+                  onChange={handleInputChange}
                   placeholder="Your email address"
                 />
               </div>
@@ -80,10 +180,14 @@ const StaffRegister = () => {
                 <input
                   className="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                   id="contact_no"
+                  name="contact_no"
+                  value={contact_no}
+                  min="0000000000"
+                  max="9999999999"
+                  onChange={handleInputChange}
                   type="number"
                   placeholder=" contact number"
                 />
-                {/* <p className="text-grey text-xs mt-1">At least 6 characters</p> */}
               </div>
               <div className="flex mb-4">
                 <div className="w-1/3 mr-1">
@@ -96,6 +200,8 @@ const StaffRegister = () => {
                   <select
                     id="trained"
                     name="trained"
+                    value={trained}
+                    onChange={handleInputChange}
                     autoComplete="trained"
                     className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   >
@@ -117,6 +223,9 @@ const StaffRegister = () => {
                     className="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                     id="center_name"
                     type="text"
+                    name="training_center"
+                    value={training_center}
+                    onChange={handleInputChange}
                     placeholder="center name"
                   />
                 </div>
@@ -130,7 +239,10 @@ const StaffRegister = () => {
                   <input
                     className="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                     id="year"
+                    name="trained_year"
+                    value={trained_year}
                     type="number"
+                    onChange={handleInputChange}
                     min="1900"
                     max="2099"
                     step="1"
@@ -138,25 +250,16 @@ const StaffRegister = () => {
                   />
                 </div>
               </div>
-              {/* <div className="flex items-center justify-between mt-8">
-                <button
-                  className="bg-indigo-700 text-center hover:bg-blue-dark font-bold py-2 px-4 rounded-full"
-                  type="submit"
-                >
-                  Sign Up
-                </button>
-              </div> */}
 
               <div className=" py-3 bg-white text-right sm:px-6  justify-center">
-                <button
+                <input
                   type="submit"
+                  value={"Register"}
                   className="w-100 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Submit
-                </button>
+                />
               </div>
             </div>
-          </div>
+          </form>
           <p className="text-center my-4">
             <Link
               to="/stafflogin"

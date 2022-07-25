@@ -2,84 +2,46 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
-const initialState = {
-  university_name: "",
-  university_email: "",
-};
-const EditUniversity = () => {
-  const [state, setState] = useState(initialState);
-  const { university_name, university_email } = state;
-
-  const navigate = useNavigate();
-  const { university_id } = useParams();
-
-  useEffect(() => {
-    axios.get(`http://localhost:5000/api/get/${university_id}`).then((resp) => {
-      setState({ ...resp.data[0] });
-    });
-  }, [university_id]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!university_name || !university_email) {
-      toast.error("please enter the values in input");
-    } else {
-      axios
-        .post("http://localhost:5000/api/post", {
-          university_name,
-          university_email,
-        })
-        .then(() => {
-          setState({ university_name: "", university_email: "" });
-        })
-        .catch((err) => {
-          toast.error(err.response.data);
-        });
-      toast.success("data added sucessfully");
-      setTimeout(() => navigate("/listuniversity"), 500);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setState({ ...state, [name]: value });
-  };
+const UpdateUniversity = () => {
   return (
-    <>
+    <div>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
             {/* <img className="mx-auto h-16 w-auto" src={logo} alt="Nss logo" /> */}
 
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Add university
+              Update university
             </h2>
             {/* <p className="mt-2 text-center text-sm text-gray-600">
-              Or{" "}
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                sign up now...
-              </a>
-            </p> */}
+        Or{" "}
+        <a
+          href="#"
+          className="font-medium text-indigo-600 hover:text-indigo-500"
+        >
+          sign up now...
+        </a>
+      </p> */}
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-8 space-y-6" action="#">
+          <form
+            // onSubmit={handleSubmit}
+            className="mt-8 space-y-6"
+            action="#"
+          >
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 {/* <input
-                  type="text"
-                  name="university_id"
-                  id="first-name"
-                  autoComplete="given-name"
-                  placeholder="enter university id"
-                  value={university_id}
-                  onChange={(e) => handleChange(e)}
-                  className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                /> */}
+            type="text"
+            name="university_id"
+            id="first-name"
+            autoComplete="given-name"
+            placeholder="enter university id"
+            value={university_id}
+            onChange={(e) => handleChange(e)}
+            className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+          /> */}
               </div>
               <div>
                 <input
@@ -88,8 +50,8 @@ const EditUniversity = () => {
                   id="university-name"
                   autoComplete="university-name"
                   placeholder="enter university name"
-                  value={university_name || ""}
-                  onChange={handleInputChange}
+                  // value={university_name}
+                  // onChange={handleInputChange}
                   className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 />
               </div>
@@ -103,8 +65,8 @@ const EditUniversity = () => {
                   type="email"
                   autoComplete="current-university_email"
                   required
-                  value={university_email || ""}
-                  onChange={handleInputChange}
+                  // value={university_email}
+                  // onChange={handleInputChange}
                   className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="email"
                 />
@@ -112,17 +74,18 @@ const EditUniversity = () => {
             </div>
 
             <div>
-              <input
+              <button
                 type="submit"
-                value={university_id ? "Update" : "Add University"}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              />
+              >
+                Add university
+              </button>
             </div>
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default EditUniversity;
+export default UpdateUniversity;
