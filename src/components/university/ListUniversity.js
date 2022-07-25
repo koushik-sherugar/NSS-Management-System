@@ -1,68 +1,90 @@
+import React from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { Link } from "react-router-dom";
-import Table from "react-bootstrap/Table";
+import { Table } from "reactstrap";
+
+import { toast } from "react-toastify";
 
 const ListUniversity = () => {
-  const [university, setUniversity] = useState([]);
+  const [data, setData] = useState([]);
+
+  const loadData = async () => {
+    const response = await axios.get("http://localhost:5000/api/get");
+    // console.log(response.data);
+    setData(response.data);
+  };
 
   useEffect(() => {
-    getUniversity();
+    // console.log("test");
+    loadData();
   }, []);
 
-  function getUniversity() {
-    axios
-      .get("http//localhost:80/nss-ms/university/")
-      .then(function (response) {
-        console.log(response.data);
-        setUniversity(response.data);
-      });
-  }
+  const deleteUniversity = (university_id) => {
+    if (window.confirm("Are you sure want to delete this university?")) {
+      console.log(university_id);
+      axios.delete(`http://localhost:5000/api/remove/${university_id}`);
+      toast.success("contact deleted sucessfully");
+      setTimeout(() => loadData(), 500);
+    }
+  };
   return (
-    <>
-      <h1>List university</h1>;
-      <Table className="striped bordered hover">
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-          {university.map((officer, key) => (
-            <tr key={key}>
-              <td>{officer.university_id}</td>
-              <td>{officer.university_name}</td>
-              <td>{officer.university_email}</td>
+    <div className="container mt-3">
+      <div>
+        <button id="menu-button" aria-expanded="true" aria-haspopup="true">
+          <h4 className="mb-4">Details of University</h4>
+        </button>
 
-              <td>
-                <Link
-                  to={`officer/${officer.id}/edit`}
-                  style={{ marginRight: "10px" }}
-                >
-                  Edit
-                </Link>
-                <button>Delete</button>
-              </td>
+        <Table>
+          <thead>
+            <tr>
+              <th>Sno</th>
+              <th>University id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Operations</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </>
+          </thead>
+          <tbody>
+            {data.map((uni, index) => {
+              return (
+                <tr key={uni.university_id}>
+                  <td>{index + 1}</td>
+                  <td>{uni.university_id}</td>
+                  <td>{uni.university_name}</td>
+                  <td>{uni.university_email}</td>
+                  <td>
+                    <Link to="/editstaff">
+                      <button
+                        // type="submit"
+                        className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      >
+                        Edit
+                      </button>
+                    </Link>
+                    <button
+                      // type="submit"
+                      className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    >
+                      View
+                    </button>
+                    <button
+                      // type="submit"
+                      className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                      onClick={() => deleteUniversity(uni.university_id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AuthUser from "../AuthUser";
+import AuthUser from "../../http";
 
 import { Link } from "react-router-dom";
 const StaffLogin = () => {
@@ -11,11 +11,9 @@ const StaffLogin = () => {
   const submitForm = () => {
     // console.log(email + "" + name);
 
-    http
-      .post("./login", { collegeid: collegeid, name: name, email: email })
-      .then((res) => {
-        console.log(res.data);
-      });
+    http.post("./login", { name: name, email: email }).then((res) => {
+      console.log(res.data);
+    });
   };
   return (
     <div>

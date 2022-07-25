@@ -1,9 +1,61 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const initialState = {
+  college_id: "",
+  activity_name: "",
+  date: "",
+  total_present: "",
+  report: "",
+};
 
 const AddActivity = () => {
+  const [state, setState] = useState(initialState);
+  const { college_id, activity_name, date, total_present, report } = state;
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!college_id || !activity_name) {
+      toast.error("please enter the values in input");
+    } else {
+      axios
+        .post("http://localhost:5000/api/addactivity", {
+          college_id,
+          activity_name,
+          date,
+          total_present,
+          report,
+          // image,
+        })
+        .then(() => {
+          setState({
+            college_id: "",
+            activity_name: "",
+            date: "",
+            total_present: "",
+            report: "",
+            // image: "",
+          });
+        })
+        .catch((err) => {
+          toast.error(err.response.data);
+        });
+      toast.success("data added sucessfully");
+      // setTimeout(() => navigate("/listuniversity"), 500);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
   return (
     <div>
-      <form action="#" method="POST">
+      <form onSubmit={handleSubmit} action="#" method="POST">
         <div className="form container mx-auto px-4 mt-4">
           <div>
             <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -32,11 +84,11 @@ const AddActivity = () => {
                         <input
                           type="number"
                           name="college_id"
-                          id="first-name"
-                          autoComplete="given-name"
+                          id="college_id"
+                          autoComplete="given-id"
                           className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                          //onChange={handleChange}
-                          //value={data.college_id}
+                          value={college_id || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
 
@@ -51,10 +103,10 @@ const AddActivity = () => {
                           type="text"
                           name="activity_name"
                           id="last-name"
-                          autoComplete="activity_name"
+                          autoComplete="given-name"
                           className="pl-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.activity_name}
+                          value={activity_name || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
                     </div>
@@ -75,6 +127,8 @@ const AddActivity = () => {
                           id="date"
                           className="mt-1 pl-2 lg:text-lg sm:text-md text-gray-500
                            focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm  sm:text-sm border border-gray-300 rounded-md"
+                          value={date || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
 
@@ -94,8 +148,8 @@ const AddActivity = () => {
                           oninput="this.value = Math.abs(this.value)"
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.total_present}
+                          value={total_present || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
                     </div>
@@ -105,91 +159,28 @@ const AddActivity = () => {
                     <div className="grid grid-cols-6 gap-6">
                       <div className="col-span-6">
                         <label
-                          htmlFor="street_address"
+                          htmlFor="report"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          Street address
+                          Activity Report
                         </label>
                         <div className="mt-1">
                           <textarea
-                            id="address"
-                            name="street_address"
+                            id="report"
+                            name="report"
                             rows={3}
-                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                            className="shadow-sm px-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                             placeholder=" 
-                             enter your address"
-                            //onChange={handleChange}
-                            //value={data.street_address}
+                             enter details regarding the activity"
+                            value={report || ""}
+                            onChange={handleInputChange}
                           />
                         </div>
-                      </div>
-                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <label
-                          htmlFor="city"
-                          className=" block text-sm font-medium text-gray-700"
-                        >
-                          City
-                        </label>
-                        <input
-                          type="text"
-                          name="city"
-                          id="city"
-                          autoComplete="city"
-                          className="mt-1 pl-2
-                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.city}
-                        />
-                      </div>
-
-                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label
-                          htmlFor="postal_code"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          ZIP / Postal code
-                        </label>
-
-                        <input
-                          type="number"
-                          name="postal_code"
-                          id="postal-code"
-                          autoComplete="postal_code"
-                          min="0"
-                          oninput="this.value = Math.abs(this.value)"
-                          className="mt-1 pl-2
-                          focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.postal_code}
-                        />
-                      </div>
-                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                        <label
-                          htmlFor="state"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          State / Province
-                        </label>
-                        <select
-                          id="state"
-                          name="state"
-                          autoComplete="state"
-                          className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          //onChange={handleChange}
-                          //value={data.state}
-                        >
-                          <option disabled selected value>
-                            select state
-                          </option>
-                          <option>Karnataka</option>
-                          <option>Maharashtra</option>
-                          <option>Delhi</option>
-                        </select>
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      {/* <label className="block text-sm font-medium text-gray-700">
                         Photo
                       </label>
                       <div className="mt-1 flex items-center">
@@ -202,6 +193,7 @@ const AddActivity = () => {
                             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                           </svg>
                         </span>
+
                         {/* <button
                           type="file" name="image"
                           className="ml-5  bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -210,7 +202,7 @@ const AddActivity = () => {
                           Select Image
                         </button> 
                          */}
-                        <div className="flex text-sm text-gray-600">
+                      {/* <div className="flex text-sm text-gray-600">
                           <label
                             htmlFor="image_upload"
                             className="ml-5  bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -225,6 +217,50 @@ const AddActivity = () => {
                               className="sr-only"
                             />
                           </label>
+                        </div> 
+                      </div>*/}
+                      {/* **************** */}
+                      <div>
+                        <label className=" mt-3 block text-sm font-medium text-gray-700">
+                          Upload Activity photo
+                        </label>
+                        <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                          <div className="space-y-1 text-center">
+                            <svg
+                              className="mx-auto h-12 w-12 text-gray-400"
+                              stroke="currentColor"
+                              fill="none"
+                              viewBox="0 0 48 48"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                            <div className="flex text-sm text-gray-600">
+                              <label
+                                htmlFor="file-upload"
+                                className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 "
+                              >
+                                <span>Upload a file</span>
+                                <input
+                                  id="file-upload"
+                                  name="image"
+                                  type="file"
+                                  className="sr-only"
+                                  // value={image || ""}
+                                  // onChange={handleInputChange}
+                                />
+                              </label>
+                              <p className="pl-1">or drag and drop</p>
+                            </div>
+                            <p className="text-xs text-gray-500">
+                              PNG, JPG, up to 5MB
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>

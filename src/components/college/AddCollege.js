@@ -1,47 +1,69 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const initialState = {
+  university_id: "",
+  college_name: "",
+  college_email: "",
+  college_address: "",
+  college_contact_no: "",
+};
+// const { university_id, college_name, college_email,college_address, college_contact_no } = college;
 
 const Addcollege = () => {
+  const [state, setState] = useState(initialState);
+  const {
+    university_id,
+    college_name,
+    college_email,
+    college_address,
+    college_contact_no,
+  } = state;
+
   const navigate = useNavigate();
-
-  const [college, setcollege] = useState({
-    college_id: "",
-    college_name: "",
-    college_email: "",
-  });
-  // const { college_id, college_name, email } = college;
-  const [inputs, setInputs] = useState([]);
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
-  };
+  // const { id } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs);
-
-    axios
-      .post("http://localhost:80/nss-ms/college/save", inputs)
-      .then(function (response) {
-        console.log(response.data);
-        navigate("/listCollege");
-      });
-
-    // axios.post("http://localhost/nms-ms/insert.php", inputs)
-
-    //   .then((result) => {
-    //     if (result.data.Status == "Invalid") {
-    //       alert("invalid user");
-    //     } else {
-    //       // props.history.push('/dashboard')
-    //       history("/listcollege");
-    //     }
-    //   });
+    if (
+      !university_id ||
+      !college_email ||
+      !college_address ||
+      !college_contact_no
+    ) {
+      toast.error("please enter the values in input");
+    } else {
+      axios
+        .post("http://localhost:5000/api/addcollege", {
+          university_id,
+          college_name,
+          college_email,
+          college_contact_no,
+          college_address,
+        })
+        .then(() => {
+          setState({
+            university_id: "",
+            college_name: "",
+            college_email: "",
+            college_contact_no: "",
+            college_address: "",
+          });
+        })
+        .catch((err) => {
+          toast.error(err.response.data);
+        });
+      toast.success("data added sucessfully");
+      // setTimeout(() => navigate("/listcollege"), 500);
+    }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -75,9 +97,11 @@ const Addcollege = () => {
                   type="number"
                   name="university_id"
                   id="university-id"
+                  min={0}
                   autoComplete="university-id"
                   placeholder="enter university id"
-                  onChange={handleChange}
+                  value={university_id || ""}
+                  onChange={handleInputChange}
                   className=" mt-5 appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 />
               </div>
@@ -89,7 +113,8 @@ const Addcollege = () => {
                   id="college-name"
                   autoComplete="college-name"
                   placeholder="enter college name"
-                  onChange={handleChange}
+                  value={college_name || ""}
+                  onChange={handleInputChange}
                   className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 />
               </div>
@@ -100,39 +125,41 @@ const Addcollege = () => {
                   type="email"
                   autoComplete="current-college_email"
                   required
-                  onChange={(e) => handleChange(e)}
+                  value={college_email || ""}
+                  onChange={handleInputChange}
                   className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="email"
                 />
               </div>
-
+              <div>
+                <input
+                  id="contact"
+                  name="college_contact_no"
+                  type="number"
+                  autoComplete="current-college_contact_no"
+                  required
+                  value={college_contact_no || ""}
+                  onChange={handleInputChange}
+                  className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="contact number"
+                />
+              </div>
               <div>
                 <textarea
                   id="text"
-                  name="College_address"
+                  name="college_address"
                   type="text"
                   rows={3}
                   autoComplete="current-college_address"
                   required
-                  onChange={(e) => handleChange(e)}
+                  value={college_address || ""}
+                  onChange={handleInputChange}
                   className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="enter college address"
                 />
               </div>
             </div>
 
-            <div>
-              <input
-                id="contact"
-                name="college_contact_no"
-                type="number"
-                autoComplete="current-college_contact_no"
-                required
-                onChange={(e) => handleChange(e)}
-                className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="contact number"
-              />
-            </div>
             <div>
               <button
                 type="submit"

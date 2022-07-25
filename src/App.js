@@ -1,4 +1,6 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -23,10 +25,11 @@ import StaffLogin from "./components/staff/StaffLogin";
 // university
 import ListUniversity from "./components/university/ListUniversity";
 import AddUniversity from "./components/university/AddUniversity";
-import EditUniversity from "./components/university/EditUniversity";
+import UpdateUniversity from "./components/university/UpdateUniversity";
 
 //activity
 import AddActivity from "./components/activity/AddActivity";
+import ListActivity from "./components/activity/ListActivity";
 
 // university
 import ListCollege from "./components/college/ListCollege";
@@ -42,6 +45,17 @@ import Table from "./components/Table";
 function App() {
   return (
     <div>
+      <ToastContainer
+        position="top-center"
+        // autoClose={3000}
+        // hideProgressBar={false}
+        // newestOnTop={false}
+        // closeOnClick
+        // rtl={false}
+        // pauseOnFocusLoss
+        // draggable
+        // pauseOnHover
+      />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} exact />
@@ -77,8 +91,8 @@ function App() {
         <Route path="/adduniversity/create" element={<AddUniversity />} exact />
         <Route path="/listuniversity" element={<ListUniversity />} exact />
         <Route
-          path="/edituniversity/:id/edit"
-          element={<EditUniversity />}
+          path="/updateuniversity/:id"
+          element={<UpdateUniversity />}
           exact
         />
 
@@ -90,6 +104,7 @@ function App() {
 
         {/* activity */}
         <Route path="/addactivity" element={<AddActivity />} exact />
+        <Route path="/listactivity" element={<ListActivity />} exact />
       </Routes>
       <Footer />
     </div>

@@ -1,94 +1,133 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
+const initialState = {
+  first_name: "",
+  last_name: "",
+  parent_name: "",
+  aadhar_no: "",
+  email_id: "",
+  gender: "",
+  blood_group: "",
+  dob: "",
+  mob_no: "",
+  category: "",
+  street_address: "",
+  city: "",
+  postal_code: "",
+  state_name: "",
+  university_name: "",
+  college_name: "",
+  course: "",
+  register_no: "",
+  university_id: "",
+  college_id: "",
+  interests: "",
+  achievements: "",
+};
 export default function StudentRegister() {
-  // const navigate = useNavigate();
+  const [state, setState] = useState(initialState);
+  const {
+    first_name,
+    last_name,
+    parent_name,
+    aadhar_no,
+    email_id,
+    gender,
+    blood_group,
+    dob,
+    mob_no,
+    category,
+    street_address,
+    city,
+    postal_code,
+    state_name,
+    university_name,
+    college_name,
+    course,
+    university_id,
+    register_no,
+    college_id,
+    interests,
+    achievements,
+  } = state;
 
-  // const [data, setData] = useState({
-  //   first_name: "",
-  //   last_name: "",
-  //   parent_name: "",
-  //   aadhar_no: "",
-  //   email_id: "",
-  //   gender: "",
-  //   blood_group: "",
-  //   dob: "",
-  //   mob_no: "",
-  //   category: "",
-  //   street_address: "",
-  //   city: "",
-  //   postal_code: "",
-  //   state: "",
-  //   // image: "",
+  const navigate = useNavigate();
+  // const { register_no } = useParams();
 
-  //   university_name: "",
-  //   college_name: "",
-  //   course: "",
-  //   register_no: "",
-  //   interests: "",
-  //   achievements: "",
-  // });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!first_name || !register_no) {
+      toast.error("please enter the values in input");
+    } else {
+      axios
+        .post("http://localhost:5000/api/studentregister", {
+          first_name,
+          last_name,
+          parent_name,
+          aadhar_no,
+          email_id,
+          gender,
+          blood_group,
+          dob,
+          mob_no,
+          category,
+          street_address,
+          city,
+          postal_code,
+          state_name,
+          university_name,
+          college_name,
+          course,
+          university_id,
+          register_no,
+          college_id,
+          interests,
+          achievements,
+        })
+        .then(() => {
+          setState({
+            first_name: "",
+            last_name: "",
+            parent_name: "",
+            aadhar_no: "",
+            email_id: "",
+            gender: "",
+            blood_group: "",
+            dob: "",
+            mob_no: "",
+            category: "",
+            street_address: "",
+            city: "",
+            postal_code: "",
+            state_name: "",
+            university_name: "",
+            college_name: "",
+            course: "",
+            university_id: "",
+            register_no: "",
+            college_id: "",
+            interests: "",
+            achievements: "",
+          });
+        })
+        .catch((err) => {
+          toast.error(err.response.data);
+        });
+      toast.success("data added sucessfully");
+      // setTimeout(() => navigate("/studentdashboard"), 500);
+    }
+  };
 
-  // const [inputs, setInputs] = useState([]);
-
-  // const handleChange = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   setInputs((values) => ({ ...values, [name]: value }));
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(inputs);
-
-  // axios
-  //   .post("http://localhost:80/nss-ms/registration/save", inputs)
-  //   .then(function (response) {
-  //     console.log(response.data);
-  //     navigate("/student");
-  //   });
-
-  // const submitForm = (e) => {
-  //   e.preventDefault();
-  //   const sendData = {
-  //     first_name: data.first_name,
-  //     last_name: data.last_name,
-  //     parent_name: data.parent_name,
-  //     aadhar_no: data.aadhar_no,
-  //     email_id: data.email_id,
-  //     gender: data.gender,
-  //     blood_group: data.blood_group,
-  //     dob: data.dob,
-  //     mob_no: data.mob_no,
-  //     category: data.category,
-  //     street_address: data.street_address,
-  //     city: data.city,
-  //     postal_code: data.postal_code,
-  //     state: data.state,
-  //     // image: data.image,
-
-  //     university_name: data.university_name,
-  //     college_name: data.college_name,
-  //     course: data.college_name,
-  //     register_no: data.register_no,
-  //     interests: data.interests,
-  //     achievements: data.achievements,
-  //   };
-  //   console.log(sendData);
-  //   axios.post("hhtp", sendData).then((result) => {
-  //     if (result.data.Status == "Invalid") {
-  //       alert("invalid user");
-  //     } else {
-  //       // props.history.push('/dashboard')
-  //       history("/dashboard");
-  //     }
-  //   });
-  // };
-
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
   return (
     <>
-      <form action="#" method="POST">
+      <form onSubmit={handleSubmit} action="#" method="POST">
         <div className="form container mx-auto px-4 mt-4">
           <div>
             <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -120,8 +159,8 @@ export default function StudentRegister() {
                           id="first-name"
                           autoComplete="given-name"
                           className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                          //onChange={handleChange}
-                          //value={data.first_name}
+                          value={first_name || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
 
@@ -138,8 +177,8 @@ export default function StudentRegister() {
                           id="last-name"
                           autoComplete="last_name"
                           className="pl-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.last_name}
+                          value={last_name || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
                     </div>
@@ -160,8 +199,8 @@ export default function StudentRegister() {
                           id="parent-name"
                           autoComplete="parent_name"
                           className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                          //onChange={handleChange}
-                          //value={data.parent_name}
+                          value={parent_name || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
 
@@ -181,13 +220,13 @@ export default function StudentRegister() {
                           oninput="this.value = Math.abs(this.value)"
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.aadhar_no}
+                          value={aadhar_no || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                         <label
-                          htmlFor="email_id"
+                          htmlFor="email-id"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Email
@@ -197,11 +236,11 @@ export default function StudentRegister() {
                           type="email"
                           name="email_id"
                           id="email-id"
-                          autoComplete="email_id"
+                          autoComplete="given-email"
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.email_id}
+                          value={email_id || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
 
@@ -235,8 +274,8 @@ export default function StudentRegister() {
                           name="gender"
                           autoComplete="gender"
                           className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          //onChange={handleChange}
-                          //value={data.gender}
+                          value={gender || ""}
+                          onChange={handleInputChange}
                         >
                           <option disabled selected value className="w-full">
                             gender
@@ -258,8 +297,8 @@ export default function StudentRegister() {
                           name="blood_group"
                           autoComplete="blood_group"
                           className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          //onChange={handleChange}
-                          //value={data.blood_group}
+                          value={blood_group || ""}
+                          onChange={handleInputChange}
                         >
                           <option disabled selected value>
                             select blood group
@@ -288,8 +327,8 @@ export default function StudentRegister() {
                           id="dob"
                           className="mt-1 pl-2 lg:text-lg sm:text-md text-gray-500
                            focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm  sm:text-sm border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.dob}
+                          value={dob || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -308,8 +347,8 @@ export default function StudentRegister() {
                           oninput="this.value = Math.abs(this.value)"
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.mob_no}
+                          value={mob_no || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
                     </div>
@@ -328,8 +367,8 @@ export default function StudentRegister() {
                           name="category"
                           autoComplete="category"
                           className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          //onChange={handleChange}
-                          //value={data.category}
+                          value={category || ""}
+                          onChange={handleInputChange}
                         >
                           <option disabled selected value>
                             select category
@@ -370,11 +409,11 @@ export default function StudentRegister() {
                             id="address"
                             name="street_address"
                             rows={3}
-                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                            className="shadow-sm px-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                             placeholder=" 
                              enter your address"
-                            //onChange={handleChange}
-                            //value={data.street_address}
+                            value={street_address || ""}
+                            onChange={handleInputChange}
                           />
                         </div>
                       </div>
@@ -392,8 +431,8 @@ export default function StudentRegister() {
                           autoComplete="city"
                           className="mt-1 pl-2
                            focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.city}
+                          value={city || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
 
@@ -414,8 +453,8 @@ export default function StudentRegister() {
                           oninput="this.value = Math.abs(this.value)"
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
-                          //onChange={handleChange}
-                          //value={data.postal_code}
+                          value={postal_code || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -427,11 +466,11 @@ export default function StudentRegister() {
                         </label>
                         <select
                           id="state"
-                          name="state"
+                          name="state_name"
                           autoComplete="state"
                           className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          //onChange={handleChange}
-                          //value={data.state}
+                          value={state_name || ""}
+                          onChange={handleInputChange}
                         >
                           <option disabled selected value>
                             select state
@@ -480,6 +519,7 @@ export default function StudentRegister() {
                         </span>
                         {/* <button
                           type="file" name="image"
+                          
                           className="ml-5  bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                           //onChange={handleChange} //value={data.image}
                         >
@@ -496,8 +536,8 @@ export default function StudentRegister() {
                               id="image-upload"
                               name="image_upload"
                               type="file"
-                              // //onChange={handleChange}
-                              // //value={data.image_upload}
+                              //     value={parent_name || ""}
+                              // onChange={handleInputChange}
                               className="sr-only"
                             />
                           </label>
@@ -509,12 +549,6 @@ export default function StudentRegister() {
               </div>
             </div>
           </div>
-
-          {/* <div className="hidden sm:block" aria-hidden="true">
-          <div className="py-5">
-            <div className="border-t border-gray-200" />
-          </div>
-        </div> */}
 
           {/* collge details */}
 
@@ -544,17 +578,24 @@ export default function StudentRegister() {
                           htmlFor="university_name"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          University / Institution
+                          University name
                         </label>
-                        <input
-                          type="text"
+
+                        <select
+                          id="university_name"
                           name="university_name"
-                          id="uni-name"
-                          autoComplete="university_name"
-                          className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                          //onChange={handleChange}
-                          //value={data.university_name}
-                        />
+                          className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          value={university_name || ""}
+                          onChange={handleInputChange}
+                        >
+                          <option disabled selected value>
+                            select university
+                          </option>
+                          <option>Manglore</option>
+                          <option>Dharwad</option>
+                          <option>Banglore</option>
+                          <option>Hasan</option>
+                        </select>
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
@@ -564,47 +605,60 @@ export default function StudentRegister() {
                         >
                           college name
                         </label>
-                        <input
+                        {/* <input
                           type="text"
                           name="college_name"
                           id="college-name"
                           autoComplete="college_name"
                           className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                          //onChange={handleChange}
-                          //value={data.college_name}
-                        />
+                          value={college_name || ""}
+                          onChange={handleInputChange}
+                        /> */}
+                        <select
+                          id="college_name"
+                          name="college_name"
+                          className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          value={college_name || ""}
+                          onChange={handleInputChange}
+                        >
+                          <option disabled selected value>
+                            select college
+                          </option>
+                          <option>
+                            Bandarkars arts and science college kundapur
+                          </option>
+                          <option>Dharwad institute of commerce</option>
+                          <option>National college of arts</option>
+                        </select>
                       </div>
-
-                      {/* <div className="col-span-6 sm:col-span-3">
-                        <label htmlFor="college-name" className="block text-sm font-medium text-gray-700">
-                          Program
-                        </label>
-                        <input
-                          type="text"
-                          name="program-name"
-                          id="college-name"
-                          autoComplete="college-name"
-                          className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                        />
-                      </div> */}
 
                       <div className="col-span-6 sm:col-span-3">
                         <label
-                          htmlFor="college-name"
+                          htmlFor="course"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Course
                         </label>
-                        <input
-                          type="text"
-                          name="college-name"
-                          id="college-name"
-                          autoComplete="college-name"
-                          className="pl-2 mt-1 focus:ring-indigo-500/50 focus:border-indigo-500/50 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md "
-                        />
-                      </div>
 
-                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                        <select
+                          id="course"
+                          name="course"
+                          className="pl-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          value={course || ""}
+                          onChange={handleInputChange}
+                        >
+                          <option disabled selected value>
+                            select course
+                          </option>
+                          <option>BCA</option>
+                          <option>BCOM</option>
+                          <option>Bsc</option>
+                          <option>BBA</option>
+                          <option>MCA</option>
+                          <option>MBA</option>
+                        </select>
+                      </div>
+                      <div className="col-span-6 sm:col-span-3">
                         <label
                           htmlFor="register_no"
                           className="block text-sm font-medium text-gray-700"
@@ -618,12 +672,75 @@ export default function StudentRegister() {
                           oninput="this.value = Math.abs(this.value)"
                           id="register_no"
                           autoComplete="register_no"
-                          //onChange={handleChange}
-                          //value={data.register_no}
+                          value={register_no || ""}
+                          onChange={handleInputChange}
                           className="mt-1 pl-2
                           focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
                         />
                       </div>
+
+                      <div className="col-span-6 sm:col-span-3">
+                        <label
+                          htmlFor="college_id"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          College id
+                        </label>
+                        <input
+                          type="number"
+                          name="college_id"
+                          min="0"
+                          oninput="this.value = Math.abs(this.value)"
+                          id="college_id"
+                          autoComplete="college_id"
+                          value={college_id || ""}
+                          onChange={handleInputChange}
+                          className="mt-1 pl-2
+                          focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
+                        />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3">
+                        <label
+                          htmlFor="university_id"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          University id
+                        </label>
+                        <input
+                          type="number"
+                          name="university_id"
+                          min="0"
+                          oninput="this.value = Math.abs(this.value)"
+                          id="university_id"
+                          autoComplete="university_id"
+                          value={university_id || ""}
+                          onChange={handleInputChange}
+                          className="mt-1 pl-2
+                          focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
+                        />
+                      </div>
+
+                      {/* <div className="col-span-6 sm:col-span-3 lg:col-span-4">
+                        <label
+                          htmlFor="register_no"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Register Number
+                        </label>
+                        <input
+                          type="number"
+                          name="register_no"
+                          min="0"
+                          oninput="this.value = Math.abs(this.value)"
+                          id="register_no"
+                          autoComplete="register_no"
+                          value={register_no || ""}
+                          onChange={handleInputChange}
+                          className="mt-1 pl-2
+                          focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm lg:text-lg sm:text-md border border-gray-300 rounded-md"
+                        />
+                      </div> */}
 
                       {/* <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                         <label htmlFor="city" className=" block text-sm font-medium text-gray-700">
@@ -697,11 +814,11 @@ export default function StudentRegister() {
                           <textarea
                             id="interests"
                             name="interests"
-                            rows={2}
-                            //onChange={handleChange}
-                            // //value={data.interests}
-                            className="shadow-sm ml-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="  enter your hobbies and the field of interest"
+                            rows={3}
+                            value={interests || ""}
+                            onChange={handleInputChange}
+                            className="shadow-sm  px-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                            placeholder=" enter your hobbies and the field of interest"
                           />
                         </div>
                       </div>
@@ -718,10 +835,10 @@ export default function StudentRegister() {
                             id="achievements"
                             name="achievements"
                             rows={3}
-                            //onChange={handleChange}
-                            // //value={data.achievements}
-                            className="shadow-sm ml-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="  enter the honours and awards won by you"
+                            value={achievements || ""}
+                            onChange={handleInputChange}
+                            className="shadow-sm  px-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                            placeholder=" enter the honours and awards won by you"
                           />
                         </div>
                       </div>
