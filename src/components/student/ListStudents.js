@@ -22,14 +22,15 @@ const ListStudents = () => {
     loadData();
   }, []);
 
-  const deleteUniversity = (university_id) => {
-    if (window.confirm("Are you sure want to delete this university?")) {
-      console.log(university_id);
-      axios.delete(`http://localhost:5000/api/remove/${university_id}`);
-      toast.success("contact deleted sucessfully");
+  const deleteStudent = (register_no) => {
+    if (window.confirm("Are you sure want to delete this student data?")) {
+      // console.log(college_id);
+      axios.delete(`http://localhost:5000/api/delete_student/${register_no}`);
+      toast.success("student deleted sucessfully");
       setTimeout(() => loadData(), 500);
     }
   };
+
   return (
     <div className="m-3 mt-3">
       <div>
@@ -81,7 +82,7 @@ const ListStudents = () => {
                     <button
                       // type="submit"
                       className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                      onClick={() => deleteUniversity(uni.university_id)}
+                      onClick={() => deleteStudent(uni.register_no)}
                     >
                       Delete
                     </button>

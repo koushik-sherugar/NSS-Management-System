@@ -26,7 +26,7 @@ const ListUniversity = () => {
     if (window.confirm("Are you sure want to delete this university?")) {
       console.log(university_id);
       axios.delete(`http://localhost:5000/api/remove/${university_id}`);
-      toast.success("contact deleted sucessfully");
+      toast.success("university deleted sucessfully");
       setTimeout(() => loadData(), 500);
     }
   };
@@ -56,7 +56,7 @@ const ListUniversity = () => {
                   <td>{uni.university_name}</td>
                   <td>{uni.university_email}</td>
                   <td>
-                    <Link to="/editstaff">
+                    <Link to={`/adduniversity/update/${uni.university_id}`}>
                       <button
                         // type="submit"
                         className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -128,9 +128,9 @@ const StaffRegister = () => {
                     className="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                     id="college_id"
                     name="college_id"
-                    value={college_id}
                     type="number"
                     placeholder="enter college id"
+                    value={college_id}
                     onChange={handleInputChange}
                   />
                 </div>

@@ -16,8 +16,7 @@ export default function Cta() {
               <div class="mx-auto md:mx-0">
                 <h3 class="text-4xl font-bold text-white">Subscribe</h3>
                 <p class="mt-2 max-w-[20rem] text-lg text-white/80">
-                  Join our weekly digest. You'll also receive latest news from
-                  us.
+                  Join our newsletter, You'll also receive latest news from us.
                 </p>
                 <form action="" class="mt-4 flex flex-col">
                   <input
@@ -51,10 +50,10 @@ export default function Cta() {
           <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
             <div className="inline-flex rounded-md shadow">
               <a
-                href="#"
+                href="/redirect"
                 className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-800 hover:bg-indigo-700 no-underline"
               >
-                Register Now
+                Get Started Now
               </a>
             </div>
           </div>

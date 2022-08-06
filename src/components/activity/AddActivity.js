@@ -9,11 +9,13 @@ const initialState = {
   date: "",
   total_present: "",
   report: "",
+  image: "",
 };
 
 const AddActivity = () => {
   const [state, setState] = useState(initialState);
-  const { college_id, activity_name, date, total_present, report } = state;
+  const { college_id, activity_name, date, total_present, report, image } =
+    state;
 
   const navigate = useNavigate();
 
@@ -29,7 +31,7 @@ const AddActivity = () => {
           date,
           total_present,
           report,
-          // image,
+          image,
         })
         .then(() => {
           setState({
@@ -38,7 +40,7 @@ const AddActivity = () => {
             date: "",
             total_present: "",
             report: "",
-            // image: "",
+            image: "",
           });
         })
         .catch((err) => {
@@ -251,8 +253,8 @@ const AddActivity = () => {
                                   name="image"
                                   type="file"
                                   className="sr-only"
-                                  // value={image || ""}
-                                  // onChange={handleInputChange}
+                                  value={image || ""}
+                                  onChange={handleInputChange}
                                 />
                               </label>
                               <p className="pl-1">or drag and drop</p>

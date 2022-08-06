@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import Link from "react-router-dom"
 import logo from "../assets/hero2.png";
 const Header = () => {
@@ -14,16 +15,18 @@ const Header = () => {
               system
             </h2>
             <p className="text-gray-600 leading-relaxed mb-12">
-              Lorem ipsum dolor sit amet, consectetur adipiscing. Vestibulum
-              rutrum metus at enim congue scelerisque. Sed suscipit metu non
-              iaculis semper consectetur adipiscing elit.
+              A complete software to register and manage details of student and
+              staff of college and also maintain their data through university
+              and the higher officials of NSS
             </p>
             <div className="flex flex-row space-x-4 ">
-              <a href="/redirect" className="no-underline">
-                <div className="py-6 px-10  bg-indigo-800 rounded-full text-3xl hover:bg-indigo-300 transition duration-300 ease-in-out flex items-center animate-bounce text-white">
+              {/* <a href="/redirect" className="no-underline"> */}
+              <Link to="/redirect" className="no-underline">
+                <div className="py-6 px-10  bg-indigo-900 rounded-full text-3xl hover:bg-indigo-700 transition duration-300 ease-in-out flex items-center animate-bounce text-white">
                   Get Started{" "}
                 </div>
-              </a>
+              </Link>
+              {/* </a> */}
             </div>
           </div>
           <div className="mb-16 sm:mb-0 mt-8 sm:mt-0 sm:w-3/5 sm:pl-12 ">
