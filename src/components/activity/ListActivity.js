@@ -46,6 +46,7 @@ const ListActivity = () => {
               <th>Date</th>
               <th>Total present</th>
               <th>Report</th>
+              <th>Image</th>
               <th>Operations</th>
             </tr>
           </thead>
@@ -59,7 +60,9 @@ const ListActivity = () => {
                   <td>{uni.date}</td>
                   <td>{uni.total_present}</td>
                   <td>{uni.report}</td>
-                  {/* <td>{uni.image}</td> */}
+                  {/* <td>
+                    <img src={uni.image} />
+                  </td> */}
                   <td className="d-flex">
                     <Link to="/editstaff">
                       <button

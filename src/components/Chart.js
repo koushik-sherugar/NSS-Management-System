@@ -25,9 +25,9 @@ const Chart = () => {
       <h1 className="text-center mt-2 mb-4">CHART</h1>
 
       <div className="container align-items-center ">
-        <h5 className=" text-4xl mt-3">Colleges Registered</h5>
+        <h5 className=" text-4xl mt-3 ml-1">University Registered</h5>
         <ResponsiveContainer width={400} height={400}>
-          <PieChart className="ml-80">
+          <PieChart className="ml-60">
             <Pie
               dataKey="users"
               isAnimationActive={false}

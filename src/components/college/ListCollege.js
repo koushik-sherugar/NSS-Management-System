@@ -22,10 +22,11 @@ const ListCollege = () => {
     loadData();
   }, []);
 
-  const deleteUniversity = (id) => {
-    if (window.confirm("Are you sure want to delete this university?")) {
-      axios.delete(`http://localhost:5000/api/remove/${id}`);
-      toast.success("contact deleted sucessfully");
+  const deleteCollege = (college_id) => {
+    if (window.confirm("Are you sure want to delete this college?")) {
+      console.log(college_id);
+      axios.delete(`http://localhost:5000/api/delete_college/${college_id}`);
+      toast.success("college deleted sucessfully");
       setTimeout(() => loadData(), 500);
     }
   };
@@ -60,7 +61,7 @@ const ListCollege = () => {
                   <td>{uni.college_address}</td>
                   <td>{uni.college_contact_no}</td>
                   <td className="d-flex">
-                    <Link to="/updateuniversity">
+                    <Link to={`/addcollege/update/${uni.college_id}`}>
                       <button
                         // type="submit"
                         className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -77,7 +78,7 @@ const ListCollege = () => {
                     <button
                       // type="submit"
                       className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                      onClick={() => deleteUniversity(uni.id)}
+                      onClick={() => deleteCollege(uni.college_id)}
                     >
                       Delete
                     </button>

@@ -84,20 +84,22 @@ const Footer = () => {
 
           <div className="sm:flex sm:flex-wrap sm:-mx-4 mt-2 pt-6 sm:mt-12 sm:pt-12 border-t">
             <div className="sm:w-full px-4 md:w-1/6">
-              <strong>FWR</strong>
-              <p>djdkdlknnd</p>
-              <p>xsdkds</p>
+              <strong>Services</strong>
+              <p>Student Registration</p>
+              <p>Staff Registration</p>
+              <p>Newsletter</p>
             </div>
             <div className="px-4 sm:w-1/3 md:w-1/4 mt-4 md:mt-0">
               <h6 className="font-bold mb-2">Address</h6>
               <address className="not-italic mb-4 text-sm">
-                123 djf6th St. gangollo, FL 32904
+                Ministry of Youth Affairs and NSS Ground Floor, Shivaji Stadium
+                , New Delhi 110001
               </address>
             </div>
             <div className="px-4 sm:w-1/3 md:w-1/4 mt-4 md:mt-0">
-              <h6 className="font-bold mb-2">koushik sheru</h6>
+              <h6 className="font-bold mb-2">Test </h6>
               <p className="mb-4 text-sm">
-                sample text blocks for <strong>koushik</strong>
+                sample text blocks for <strong>test</strong>
                 <em>text here</em>
               </p>
             </div>
@@ -107,12 +109,8 @@ const Footer = () => {
           </div>
           <div className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
             <div className="sm:flex sm:items-center sm:justify-between">
-              <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                © 2022{" "}
-                <a href="#" target="_blank" className="hover:underline">
-                  C-22 batch™
-                </a>
-                . All Rights Reserved.
+              <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400 ml-40">
+                NSS Management System ©2022. Built by C-20 batch
               </span>
               <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                 <a

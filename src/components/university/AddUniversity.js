@@ -15,7 +15,7 @@ const EditUniversity = () => {
   const { university_id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/get/${university_id}`).then((resp) => {
+    axios.get(`http://localhost:5000/api/put/${university_id}`).then((resp) => {
       setState({ ...resp.data[0] });
     });
   }, [university_id]);
@@ -47,6 +47,20 @@ const EditUniversity = () => {
   };
   return (
     <>
+      <Link
+        to="/adminwindow"
+        className="flex mt-3 ml-2 no-underline text-black"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-10 w-10"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
+        </svg>
+        <h1>Back</h1>
+      </Link>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>

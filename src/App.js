@@ -2,9 +2,13 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
+import ErrorPage from "./pages/ErrorPage";
 import Redirect from "./pages/Redirect";
+import Adminwindow from "./pages/Adminwindow";
+
+import SendMail from "./components/SendMail";
 // import StaffAdminLogin from "./pages/StaffAdminLogin";
 // import StudentStaffLogin from "./pages/StudentStaffLogin";
 
@@ -13,8 +17,10 @@ import StudentRegister from "./components/student/StudentRegister";
 import StudentLogin from "./components/student/StudentLogin";
 import ListStudents from "./components/student/ListStudents";
 import EditStudent from "./components/student/EditStudent";
+import DashboardStudent from "./components/student/DashboardStudent";
+
 import Admin from "./pages/Admin";
-import Footer from "./components/Footer";
+import Footer from "./pages/Footer";
 
 import ListStaff from "./components/staff/ListStaff";
 import AddStaff from "./components/staff/AddStaff";
@@ -25,11 +31,11 @@ import StaffLogin from "./components/staff/StaffLogin";
 // university
 import ListUniversity from "./components/university/ListUniversity";
 import AddUniversity from "./components/university/AddUniversity";
-import UpdateUniversity from "./components/university/UpdateUniversity";
 
 //activity
 import AddActivity from "./components/activity/AddActivity";
 import ListActivity from "./components/activity/ListActivity";
+import ActivityCard from "./components/activity/ActivityCard";
 
 // university
 import ListCollege from "./components/college/ListCollege";
@@ -39,8 +45,6 @@ import AddCollege from "./components/college/AddCollege";
 //admin
 import AdminLogin from "./components/admin/AdminLogin";
 import Chart from "./components/Chart";
-
-import Table from "./components/Table";
 
 function App() {
   return (
@@ -56,18 +60,22 @@ function App() {
         // draggable
         // pauseOnHover
       />
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} exact />
+        <Route path="*" element={<ErrorPage />} exact />
+
         <Route path="/studentregister" element={<StudentRegister />} exact />
         <Route path="/studentlogin" element={<StudentLogin />} exact />
         <Route path="/liststudents" element={<ListStudents />} exact />
         <Route path="/editstudent" element={<EditStudent />} exact />
+        <Route path="/dashboardstudent" element={<DashboardStudent />} exact />
 
         <Route path="/redirect" element={<Redirect />} exact />
 
-        <Route path="/table" element={<Table />} exact />
-        {/* <Route path="/staffadminlogin" element={<StaffAdminLogin />} exact />
+        <Route path="/sendmail" element={<SendMail />} exact />
+        <Route path="/adminwindow" element={<Adminwindow />} exact />
+
+        {/*
         <Route
           path="/studentstafflogin"
           element={<StudentStaffLogin />}
@@ -88,13 +96,13 @@ function App() {
         {/* :id/edit */}
 
         {/* university */}
-        <Route path="/adduniversity/create" element={<AddUniversity />} exact />
-        <Route path="/listuniversity" element={<ListUniversity />} exact />
+        <Route path="/adduniversity" element={<AddUniversity />} exact />
         <Route
-          path="/updateuniversity/:id"
-          element={<UpdateUniversity />}
+          path="/adduniversity/update/:university_id"
+          element={<AddUniversity />}
           exact
         />
+        <Route path="/listuniversity" element={<ListUniversity />} exact />
 
         {/* college */}
 
@@ -105,6 +113,7 @@ function App() {
         {/* activity */}
         <Route path="/addactivity" element={<AddActivity />} exact />
         <Route path="/listactivity" element={<ListActivity />} exact />
+        <Route path="/activitycard" element={<ActivityCard />} exact />
       </Routes>
       <Footer />
     </div>
