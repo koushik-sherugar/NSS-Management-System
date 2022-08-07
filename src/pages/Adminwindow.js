@@ -1,6 +1,14 @@
-import React from "react";
-import Chart from "../components/Chart";
+import React, { Children } from "react";
+import { NavLink } from "react-router-dom";
 
+// import Chart from "../components/Chart";
+// const SidebarData = [
+//   {
+//     title: "Home",
+//     path: "/",
+//     icon: <FaIcons.FaHome />,
+//   },
+// ];
 const Adminwindow = () => {
   return (
     <div>
@@ -66,8 +74,8 @@ const Adminwindow = () => {
               </a>
             </li>
             <li>
-              <a
-                href="/listuniversity"
+              <NavLink
+                to="/listuniversity"
                 className="px-4 py-3 flex items-center space-x-4  no-underline rounded-md text-gray-600 group"
               >
                 <svg
@@ -88,12 +96,12 @@ const Adminwindow = () => {
                   />
                 </svg>
                 <span className="group-hover:text-gray-700">University</span>
-              </a>
+              </NavLink>
             </li>
 
             <li>
-              <a
-                href="/listcollege"
+              <NavLink
+                to="/listcollege"
                 className="px-4 py-3 flex items-center space-x-4  no-underline rounded-md text-gray-600 group"
               >
                 <svg
@@ -114,7 +122,7 @@ const Adminwindow = () => {
                   />
                 </svg>
                 <span className="group-hover:text-gray-700">College</span>
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -172,7 +180,8 @@ const Adminwindow = () => {
             </div>
           </div>
         </div>
-
+        {/* <main>{children}</main> */}
+        {/* <Chart /> */}
         {/* container */}
         {/* <div className="px-6 pt-6 2xl:container">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -949,8 +958,6 @@ const Adminwindow = () => {
             </div>
           </div>
         </div> */}
-
-        <Chart />
       </div>
     </div>
   );
