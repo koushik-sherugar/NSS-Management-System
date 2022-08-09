@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const redirect = () => {
   return (
     <>
-      <Link to="/" className="flex mt-3 ml-2 no-underline text-black">
+      <Navbar />
+      {/* <Link to="/" className="flex mt-3 ml-2 no-underline text-black">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-10 w-10"
@@ -14,7 +16,7 @@ const redirect = () => {
           <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
         </svg>
         <h1>Home</h1>
-      </Link>
+      </Link> */}
       <div className="w-full h-full mt-20 mb-40">
         <div className=" container mx-auto px-8 flex flex-row ">
           <div className="  m-4 flex flex-col items-center sm:items-start text-center sm:text-left">

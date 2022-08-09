@@ -1,15 +1,7 @@
 import React, { Children } from "react";
 import { NavLink } from "react-router-dom";
 
-// import Chart from "../components/Chart";
-// const SidebarData = [
-//   {
-//     title: "Home",
-//     path: "/",
-//     icon: <FaIcons.FaHome />,
-//   },
-// ];
-const Adminwindow = () => {
+const StudentDashboard = () => {
   return (
     <div>
       <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
@@ -44,9 +36,9 @@ const Adminwindow = () => {
               className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
             /> */}
             <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-              Staff name
+              student name
             </h5>
-            <span className="hidden text-gray-400 lg:block">Admin</span>
+            <span className="hidden text-gray-400 lg:block">STUDENT</span>
           </div>
 
           <ul className="space-y-2 tracking-wide mt-8">
@@ -180,7 +172,6 @@ const Adminwindow = () => {
             </div>
           </div>
         </div>
-        {/* <main>{children}</main> */}
         {/* <Chart /> */}
         {/* container */}
         {/* <div className="px-6 pt-6 2xl:container">
@@ -963,4 +954,4 @@ const Adminwindow = () => {
   );
 };
 
-export default Adminwindow;
+export default StudentDashboard;

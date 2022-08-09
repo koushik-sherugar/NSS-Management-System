@@ -2,11 +2,10 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
 import Redirect from "./pages/Redirect";
-import Adminwindow from "./pages/Adminwindow";
+import Adminwindow from "./components/layout/Adminwindow";
 
 import SendMail from "./components/SendMail";
 // import StaffAdminLogin from "./pages/StaffAdminLogin";
@@ -20,13 +19,14 @@ import EditStudent from "./components/student/EditStudent";
 import DashboardStudent from "./components/student/DashboardStudent";
 
 import Admin from "./pages/Admin";
-import Footer from "./pages/Footer";
+import Footer from "./components/layout/Footer";
 
 import ListStaff from "./components/staff/ListStaff";
 import AddStaff from "./components/staff/AddStaff";
 import EditStaff from "./components/staff/EditStaff";
 import StaffRegister from "./components/staff/StaffRegister";
 import StaffLogin from "./components/staff/StaffLogin";
+import StaffDashboard from "./components/layout/stafflayout/StaffDashboard";
 
 // university
 import ListUniversity from "./components/university/ListUniversity";
@@ -92,8 +92,7 @@ function App() {
         <Route path="/editstaff/" element={<EditStaff />} exact />
         <Route path="/staffregister" element={<StaffRegister />} exact />
         <Route path="/stafflogin" element={<StaffLogin />} exact />
-
-        {/* :id/edit */}
+        <Route path="/staffdashboard" element={<StaffDashboard />} exact />
 
         {/* university */}
         <Route path="/adduniversity" element={<AddUniversity />} exact />

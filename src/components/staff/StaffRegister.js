@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import Navbar from "../../pages/Navbar";
+
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -91,6 +93,7 @@ const StaffRegister = () => {
   //   });
   return (
     <div>
+      <Navbar />
       <div className="w-full bg-gray-100 pt-5">
         <div className="container mx-auto py-8">
           <form

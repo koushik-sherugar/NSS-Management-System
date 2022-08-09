@@ -7,6 +7,7 @@ const initialState = {
   university_name: "",
   university_email: "",
 };
+
 const EditUniversity = () => {
   const [state, setState] = useState(initialState);
   const { university_name, university_email } = state;

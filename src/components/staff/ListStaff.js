@@ -19,7 +19,7 @@ const ListStaff = () => {
   };
 
   return (
-    <div className="container mt-3">
+    <div className=" container mt-3" style={{marginLeft: "270px"}}>
       <div>
         <button id="menu-button" aria-expanded="true" aria-haspopup="true">
           <h4 className="mb-4">Details of staff</h4>
