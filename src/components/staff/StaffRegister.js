@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import Navbar from "../../pages/Navbar";
+
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -25,39 +27,73 @@ const StaffRegister = () => {
   } = state;
 
   const navigate = useNavigate();
-  // const { university_id } = useParams();
+  const { staff_id } = useParams();
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/getstaff/${staff_id}`).then((resp) => {
+      setState({ ...resp.data[0] });
+    });
+  }, [staff_id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!college_id || !staff_name) {
       toast.error("please enter the values in input");
     } else {
-      axios
-        .post("http://localhost:5000/api/staffregister", {
-          college_id,
-          staff_name,
-          contact_no,
-          staff_email,
-          trained,
-          training_center,
-          trained_year,
-        })
-        .then(() => {
-          setState({
-            college_id: "",
-            staff_name: "",
-            contact_no: "",
-            staff_email: "",
-            trained: "",
-            training_center: "",
-            trained_year: "",
+      if (!staff_id) {
+        axios
+          .post("http://localhost:5000/api/staffregister", {
+            college_id,
+            staff_name,
+            contact_no,
+            staff_email,
+            trained,
+            training_center,
+            trained_year,
+          })
+          .then(() => {
+            setState({
+              college_id: "",
+              staff_name: "",
+              contact_no: "",
+              staff_email: "",
+              trained: "",
+              training_center: "",
+              trained_year: "",
+            });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
           });
-        })
-        .catch((err) => {
-          toast.error(err.response.data);
-        });
-      toast.success("data added sucessfully");
-      // setTimeout(() => navigate("/listuniversity"), 500);
+        toast.success("data added sucessfully");
+        setTimeout(() => navigate("/liststudents"), 500);
+      } else {
+        axios
+          .put(`http://localhost:5000/api/updatestaff/${staff_id}`, {
+            college_id,
+            staff_name,
+            contact_no,
+            staff_email,
+            trained,
+            training_center,
+            trained_year,
+          })
+          .then(() => {
+            setState({
+              college_id: "",
+              staff_name: "",
+              contact_no: "",
+              staff_email: "",
+              trained: "",
+              training_center: "",
+              trained_year: "",
+            });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
+          });
+        toast.success("University updated sucessfully");
+        setTimeout(() => navigate("/listuniversity"), 500);
+      }
     }
   };
 
@@ -65,32 +101,10 @@ const StaffRegister = () => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
-  //   const [college_id, setcollege_id] = useState("");
-  //   const [staff_name, setstaff_name] = useState("");
-  //   const [staff_email, setstaff_email] = useState("");
-  //   const [contact_no, setcontact_no] = useState("");
-  //   const [trained, settrained] = useState("");
-  //   const [training_center, settraining_center] = useState("");
-  //   const [trained_year, settrained_year] = useState("");
 
-  // const register = () => {
-  //   console.log(email + "" + name);
-  // };
-  // const register = axios
-  //   .post("http://localhost:5000/api/staffregister", {
-  //     college_id: college_id,
-  //     staff_name: staff_name,
-  //     contact_no: contact_no,
-  //     staff_email: staff_email,
-  //     trained: trained,
-  //     training_center: training_center,
-  //     trained_year: trained_year,
-  //   })
-  //   .then((response) => {
-  //     console.log(response);
-  //   });
   return (
     <div>
+      <Navbar />
       <div className="w-full bg-gray-100 pt-5">
         <div className="container mx-auto py-8">
           <form
@@ -254,7 +268,7 @@ const StaffRegister = () => {
               <div className=" py-3 bg-white text-right sm:px-6  justify-center">
                 <input
                   type="submit"
-                  value={"Register"}
+                  value={staff_id ? "Update" : "Register"}
                   className="w-100 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 />
               </div>

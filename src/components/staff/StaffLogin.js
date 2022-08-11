@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
+import Navbar from "../../pages/Navbar";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-// const initialState = {
-//   college_id: "",
-//   staff_name: "",
-//   staff_email: "",
-// };
+const initialState = {
+  college_id: "",
+  staff_name: "",
+  staff_email: "",
+};
 
-const StaffLogin = ({ setLoginStaff }) => {
-  const [staff, setStaff] = useState({
-    college_id: "",
-    staff_name: "",
-    staff_email: "",
-  });
+const StaffLogin = () => {
+  const [staff, setStaff] = useState(initialState);
+
+  const { college_id, staff_name, staff_email } = staff;
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,76 +24,36 @@ const StaffLogin = ({ setLoginStaff }) => {
     });
   };
 
-  const login = () => {
-    axios.post("http://localhost:5000/api/stafflogin", staff).then((res) => {
-      alert(res.data.message);
-      // setLoginStaff(res.data.staff);
-      // history.push("/");
-    });
+  const login = (e) => {
+    e.preventDefault();
+
+    const { college_id, staff_name, staff_email } = staff;
+
+    axios
+      .post("http://localhost:5000/api/stafflogin", {
+        college_id,
+        staff_name,
+        staff_email,
+      })
+      .then((res) => {
+        // alert(res.data.message);
+        // console.log("fonrtend", res);
+        if (res.data.error) {
+          toast.error("No user found");
+          // console.log("error", res.data.error);
+        } else {
+          toast.success("Log in sucessfull");
+          navigate("/liststudents");
+          // console.log(first)
+        }
+        // setLoginStaff(res.data.staff);
+        // history.push("/");
+      });
   };
 
-  // const [staff_name, setStaff_name] = useState("");
-  // const [staff_email, setStaff_email] = useState("");
-
-  // const login = () => {
-
-  //     axios.post("http://localhost:5000/api/stafflogin"),{
-  //       staff_name:staff_name,
-  //       staff_email:staff_email
-  //     }
-  //     toast.success("contact deleted sucessfully");
-  //     setTimeout(() => loadData(), 500);
-  //   }
-  // };
-
-  // **********
-  // const [state, setState] = useState(initialState);
-  // const { college_id, staff_name, staff_email } = state;
-
-  // const navigate = useNavigate();
-  // // const { college_id } = useParams();
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (!college_id || !staff_name) {
-  //     toast.error("please enter the values in input");
-  //   } else {
-  //     axios
-  //       .post("http://localhost:5000/api/stafflogin", {
-  //         college_id,
-  //         staff_name,
-  //         staff_email,
-  //       })
-  //       .then(() => {
-  //         setState({
-  //           college_id: "",
-  //           staff_name: "",
-  //           staff_email: "",
-  //         });
-  //       })
-  //       .catch((err) => {
-  //         toast.error(err.response.data);
-  //       });
-  //     toast.success("data added sucessfully");
-  //     // setTimeout(() => navigate("/listuniversity"), 500);
-  //   }
-  // };
-
-  // const loginCollege = (college_id) => {
-  //   if (window.confirm("Are you sure want to delete this university?")) {
-  //     console.log(college_id);
-  //     axios.delete(`http://localhost:5000/api/remove/${college_id}`);
-  //     toast.success("contact deleted sucessfully");
-  //     setTimeout(() => loadData(), 500);
-  //   }
-  // };
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setState({ ...state, [name]: value });
-  // };
   return (
     <div>
+      <Navbar />
       <div className="w-full bg-grey-lightest bg-gray-50 pt-5">
         <div className="container mx-auto py-8">
           <form
@@ -134,9 +94,6 @@ const StaffLogin = ({ setLoginStaff }) => {
                     name="college_id"
                     value={staff.college_id}
                     onChange={handleChange}
-                    // value={college_id}
-                    // onChange={handleInputChange}
-
                     placeholder="enter college id"
                   />
                 </div>
@@ -150,11 +107,6 @@ const StaffLogin = ({ setLoginStaff }) => {
                   <input
                     className="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                     id="name"
-                    // value={staff_name}
-                    // onChange={handleInputChange}
-                    // onChange={(e) => {
-                    //   setStaff_name(e.target.value);
-                    // }}
                     value={staff.staff_name}
                     onChange={handleChange}
                     name="staff_name"
@@ -190,7 +142,7 @@ const StaffLogin = ({ setLoginStaff }) => {
 
               <div className=" py-3 bg-white text-right sm:px-6  justify-center">
                 <button
-                  type="submit"
+                  type="button"
                   onClick={login}
                   className="w-100 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >

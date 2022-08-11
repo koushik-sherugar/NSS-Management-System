@@ -1,7 +1,7 @@
-import React from "react";
-import Chart from "../components/Chart";
+import React, { Children } from "react";
+import { NavLink } from "react-router-dom";
 
-const Adminwindow = () => {
+const StudentDashboard = () => {
   return (
     <div>
       <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
@@ -36,9 +36,9 @@ const Adminwindow = () => {
               className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
             /> */}
             <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-              Staff name
+              student name
             </h5>
-            <span className="hidden text-gray-400 lg:block">Admin</span>
+            <span className="hidden text-gray-400 lg:block">STUDENT</span>
           </div>
 
           <ul className="space-y-2 tracking-wide mt-8">
@@ -66,8 +66,8 @@ const Adminwindow = () => {
               </a>
             </li>
             <li>
-              <a
-                href="/listuniversity"
+              <NavLink
+                to="/listuniversity"
                 className="px-4 py-3 flex items-center space-x-4  no-underline rounded-md text-gray-600 group"
               >
                 <svg
@@ -88,12 +88,12 @@ const Adminwindow = () => {
                   />
                 </svg>
                 <span className="group-hover:text-gray-700">University</span>
-              </a>
+              </NavLink>
             </li>
 
             <li>
-              <a
-                href="/listcollege"
+              <NavLink
+                to="/listcollege"
                 className="px-4 py-3 flex items-center space-x-4  no-underline rounded-md text-gray-600 group"
               >
                 <svg
@@ -114,7 +114,7 @@ const Adminwindow = () => {
                   />
                 </svg>
                 <span className="group-hover:text-gray-700">College</span>
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -172,7 +172,7 @@ const Adminwindow = () => {
             </div>
           </div>
         </div>
-
+        {/* <Chart /> */}
         {/* container */}
         {/* <div className="px-6 pt-6 2xl:container">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -949,11 +949,9 @@ const Adminwindow = () => {
             </div>
           </div>
         </div> */}
-
-        <Chart />
       </div>
     </div>
   );
 };
 
-export default Adminwindow;
+export default StudentDashboard;

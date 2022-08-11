@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Navbar from "../../pages/Navbar";
 
 const initialState = {
   first_name: "",
@@ -127,6 +128,7 @@ export default function StudentRegister() {
   };
   return (
     <>
+      <Navbar />
       <form onSubmit={handleSubmit} action="#" method="POST">
         <div className="form container mx-auto px-4 mt-4">
           <div>
