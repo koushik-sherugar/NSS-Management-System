@@ -17,7 +17,7 @@ app.use(router);
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// staff REGISTRATION  LOGIN
+//////////////////////// staff REGISTRATION  LOGIN
 
 app.post("/api/staffregister", (req, res) => {
   const {
@@ -51,7 +51,8 @@ app.post("/api/staffregister", (req, res) => {
   );
 });
 
-app.get("/api/stafflogin", (req, res) => {
+app.post("/api/stafflogin", (req, res) => {
+  console.log("req.body", req.body);
   const { staff_name, staff_email } = req.body;
 
   const sqlStafflogin =
@@ -61,26 +62,90 @@ app.get("/api/stafflogin", (req, res) => {
     [staff_name, staff_email],
 
     (error, result) => {
+      if (result.length > 0) {
+        res.send(result);
+      } else {
+        res.send({ error: "wrong username password" });
+      }
+    }
+  );
+});
+
+app.get("/api/liststaff", (req, res) => {
+  const sqlGet = "SELECT * from staff";
+  db.query(sqlGet, (err, result) => {
+    res.send(result);
+  });
+});
+
+app.delete("/api/removestaff/:staff_email", (req, res) => {
+  const { staff_email } = req.params;
+  console.log("delete staff: ", staff_email);
+
+  const sqlRemove = "DELETE FROM staff WHERE staff_email = ?";
+  db.query(sqlRemove, staff_email, (error, request) => {
+    if (error) {
+      console.log(error);
+    }
+  });
+});
+
+app.get("/api/getstaff/:staff_id", (req, res) => {
+  const { staff_id } = req.params;
+  console.log("request", req.params);
+  const sqlGet = "SELECT * FROM staff WHERE staff_id = ?";
+  db.query(sqlGet, staff_id, (error, result) => {
+    if (error) {
+      console.log(error);
+    }
+    res.send(result);
+    console.log("response", result);
+  });
+});
+
+app.put("/api/updatestaff/:staff_id", (req, res) => {
+  const { staff_id } = req.params;
+  console.log("req.body", req.body);
+  const {
+    college_id,
+    staff_name,
+    contact_no,
+    staff_email,
+    trained,
+    training_center,
+    trained_year,
+  } = req.body;
+
+  console.log(
+    college_id,
+    staff_name,
+    contact_no,
+    staff_email,
+    trained,
+    training_center,
+    trained_year
+  );
+  const sqlUpdate =
+    "UPDATE staff SET college_id = ?, staff_name = ?, contact_no = ? , staff_email= ?, trained = ?, training_center = ?, trained_year = ? WHERE staff_id = ?";
+  db.query(
+    sqlUpdate,
+    [
+      college_id,
+      staff_name,
+      contact_no,
+      staff_email,
+      trained,
+      training_center,
+      trained_year,
+      staff_id,
+    ],
+    (error, result) => {
       if (error) {
         console.log(error);
-        res.send({ error: error });
       }
-      console.log(result);
       res.send(result);
+      console.log(result);
     }
-
-    //   (error, result) =>
-
-    // {
-    //   if (error) {
-    //     console.log(error);
-    //   }
-    //   if (result) {
-    //     res.send(result);
-    //   } else {
-    //     res.send({ message: "wrong name and password" });
-    //   }
-    // }
   );
 });
 
@@ -148,6 +213,26 @@ app.post("/api/studentregister", (req, res) => {
   );
 });
 
+app.post("/api/studentlogin", (req, res) => {
+  // console.log("req.body", req.body);
+  const { first_name, register_no } = req.body;
+
+  const sqlStudentlogin =
+    "Select * FROM student WHERE first_name = ? AND register_no = ?";
+  db.query(
+    sqlStudentlogin,
+    [first_name, register_no],
+
+    (error, result) => {
+      if (result.length > 0) {
+        res.send(result);
+      } else {
+        res.send({ error: "wrong username and password" });
+      }
+    }
+  );
+});
+
 // list StudentRegister
 app.get("/api/liststudents", (req, res) => {
   const sqlGet = "SELECT * from student";
@@ -182,6 +267,84 @@ app.delete("/api/delete_student/:register_no", (req, res) => {
   });
 });
 
+app.get("/api/getstudent/:student_id", (req, res) => {
+  const { student_id } = req.params;
+  // console.log("request", req.params);
+  const sqlGet = "SELECT * FROM student WHERE student_id = ?";
+  db.query(sqlGet, student_id, (error, result) => {
+    if (error) {
+      console.log(error);
+    }
+    res.send(result);
+    console.log("response", result);
+  });
+});
+
+// app.put("/api/updatestudent/:student_id", (req, res) => {
+//   const { student_id } = req.params;
+//   // console.log("req.body", req.body);
+//   const {
+//     first_name,
+//     last_name,
+//     parent_name,
+//     aadhar_no,
+//     email_id,
+//     gender,
+//     blood_group,
+//     dob,
+//     mob_no,
+//     category,
+//     street_address,
+//     city,
+//     postal_code,
+//     state_name,
+//     university_name,
+//     college_name,
+//     university_id,
+//     college_id,
+//     course,
+//     register_no,
+//     interests,
+//     achievements,
+//   } = req.body;
+
+//   const sqlUpdate =
+//     "UPDATE student SET first_name = ?,last_name = ?,parent_name = ?,aadhar_no = ?,email_id = ?,gender = ?,blood_group = ?,dob = ?,mob_no = ?,category = ?,street_address = ?,city = ?,postal_code = ?,state_name = ?,university_name = ?,college_name = ?,university_id = ?,college_id = ?,course = ?,register_no = ?,interests = ?,achievements = ? WHERE student_id = ?";
+//   db.query(
+//     sqlUpdate,
+//     [
+//       first_name,
+//       last_name,
+//       parent_name,
+//       aadhar_no,
+//       email_id,
+//       gender,
+//       blood_group,
+//       dob,
+//       mob_no,
+//       category,
+//       street_address,
+//       city,
+//       postal_code,
+//       state_name,
+//       university_name,
+//       college_name,
+//       university_id,
+//       college_id,
+//       course,
+//       register_no,
+//       interests,
+//       achievements,
+//     ],
+//     (error, result) => {
+//       if (error) {
+//         console.log(error);
+//       }
+//       res.send(result);
+//       console.log(result);
+//     }
+//   );
+// });
 //**************************************************************** */
 //*********************ACTIVITY MODULE******************************************* */
 
@@ -257,21 +420,22 @@ app.delete("/api/remove/:university_id", (req, res) => {
 app.get("/api/get/:university_id", (req, res) => {
   const { university_id } = req.params;
 
-  const sqlGet = "SELECT * FROM university WHERE id = ?";
+  const sqlGet = "SELECT * FROM university WHERE university_id = ?";
   db.query(sqlGet, university_id, (error, result) => {
     if (error) {
       console.log(error);
     }
     res.send(result);
+    console.log("response", result);
   });
 });
 
-app.put("/api/put/:university_id", (req, res) => {
+app.put("/api/update/:university_id", (req, res) => {
   const { university_id } = req.params;
   const { university_name, university_email } = req.body;
 
   const sqlUpdate =
-    "UPDATE university SET university_name = ?, university_email = ? WHERE university_id= ?";
+    "UPDATE university SET university_name = ?, university_email = ? WHERE university_id = ?";
   db.query(
     sqlUpdate,
     [university_name, university_email, university_id],
@@ -378,7 +542,8 @@ app.put("/api/put/:university_id", (req, res) => {
 //mail
 
 app.post("/api/send-email", (req, res) => {
- 
+  const { email_id } = req.body;
+  console.log("req email", req.body);
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -389,12 +554,12 @@ app.post("/api/send-email", (req, res) => {
       clientSecret: process.env.OAUTH_CLIENT_SECRET,
       refreshToken: process.env.OAUTH_REFRESH_TOKEN,
     },
-   });
-   
+  });
+
   let mailOptions = {
-    from: "kaushiksherugar2001@gmail.com", 
+    from: "kaushiksherugar2001@gmail.com",
     to: req.body.to, //"kotegarkoushik@gmail.com",
-    subject: "Approval status of NSS registration", 
+    subject: "Approval status of NSS registration",
     text: "Description of the mail",
     html: `
       <div style="padding:15px;border-style: ridge">
@@ -410,7 +575,7 @@ app.post("/api/send-email", (req, res) => {
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log("Error " + err);
+      console.log("Error " + error);
       res.json({ status: true, respMesg: "Email Sent Successfully" });
     } else {
       console.log("Email sent successfully");
@@ -418,7 +583,6 @@ app.post("/api/send-email", (req, res) => {
     }
   });
 });
-
 
 app.listen(5000, () => {
   console.log("Server is running on port 5000");
