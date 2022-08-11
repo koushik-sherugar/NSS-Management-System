@@ -14,7 +14,7 @@ const StaffLogin = () => {
   const [staff, setStaff] = useState(initialState);
 
   const { college_id, staff_name, staff_email } = staff;
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,69 +36,21 @@ const StaffLogin = () => {
         staff_email,
       })
       .then((res) => {
-        console.log("response ", {
-          college_id,
-          staff_name,
-          staff_email,
-        });
         // alert(res.data.message);
-        console.log(res);
+        // console.log("fonrtend", res);
+        if (res.data.error) {
+          toast.error("No user found");
+          // console.log("error", res.data.error);
+        } else {
+          toast.success("Log in sucessfull");
+          navigate("/liststudents");
+          // console.log(first)
+        }
         // setLoginStaff(res.data.staff);
         // history.push("/");
       });
   };
 
-  // const [staff_name, setStaff_name] = useState("");
-  // const [staff_email, setStaff_email] = useState("");
-
-  // const login = () => {
-
-  //     axios.post("http://localhost:5000/api/stafflogin"),{
-  //       staff_name:staff_name,
-  //       staff_email:staff_email
-  //     }
-  //     toast.success("contact deleted sucessfully");
-  //     setTimeout(() => loadData(), 500);
-  //   }
-  // };
-
-  // **********
-  // const [state, setState] = useState(initialState);
-  // const { college_id, staff_name, staff_email } = state;
-
-  // const navigate = useNavigate();
-  // // const { college_id } = useParams();
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (!college_id || !staff_name) {
-  //     toast.error("please enter the values in input");
-  //   } else {
-  //     axios
-  //       .post("http://localhost:5000/api/stafflogin", {
-  //         college_id,
-  //         staff_name,
-  //         staff_email,
-  //       })
-  //       .then(() => {
-  //         setState({
-  //           college_id: "",
-  //           staff_name: "",
-  //           staff_email: "",
-  //         });
-  //       })
-  //       .catch((err) => {
-  //         toast.error(err.response.data);
-  //       });
-  //     toast.success("data added sucessfully");
-  //     // setTimeout(() => navigate("/listuniversity"), 500);
-  //   }
-  // };
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setState({ ...state, [name]: value });
-  // };
   return (
     <div>
       <Navbar />
@@ -142,9 +94,6 @@ const StaffLogin = () => {
                     name="college_id"
                     value={staff.college_id}
                     onChange={handleChange}
-                    // value={college_id}
-                    // onChange={handleInputChange}
-
                     placeholder="enter college id"
                   />
                 </div>
@@ -158,11 +107,6 @@ const StaffLogin = () => {
                   <input
                     className="appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                     id="name"
-                    // value={staff_name}
-                    // onChange={handleInputChange}
-                    // onChange={(e) => {
-                    //   setStaff_name(e.target.value);
-                    // }}
                     value={staff.staff_name}
                     onChange={handleChange}
                     name="staff_name"

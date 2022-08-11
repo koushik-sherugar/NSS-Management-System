@@ -22,8 +22,8 @@ import Admin from "./pages/Admin";
 import Footer from "./components/layout/Footer";
 
 import ListStaff from "./components/staff/ListStaff";
-import AddStaff from "./components/staff/AddStaff";
-import EditStaff from "./components/staff/EditStaff";
+// import AddStaff from "./components/staff/AddStaff";
+// import EditStaff from "./components/staff/EditStaff";
 import StaffRegister from "./components/staff/StaffRegister";
 import StaffLogin from "./components/staff/StaffLogin";
 import StaffDashboard from "./components/layout/stafflayout/StaffDashboard";
@@ -31,6 +31,7 @@ import StaffDashboard from "./components/layout/stafflayout/StaffDashboard";
 // university
 import ListUniversity from "./components/university/ListUniversity";
 import AddUniversity from "./components/university/AddUniversity";
+import ViewUniversity from "./components/university/ViewUniversity";
 
 //activity
 import AddActivity from "./components/activity/AddActivity";
@@ -86,11 +87,13 @@ function App() {
         <Route path="/adminlogin" element={<AdminLogin />} exact />
         <Route path="/chart" element={<Chart />} exact />
 
-        {/* staff */}
-        <Route path="/addstaff" element={<AddStaff />} exact />
         <Route path="/Liststaff" element={<ListStaff />} exact />
-        <Route path="/editstaff/" element={<EditStaff />} exact />
         <Route path="/staffregister" element={<StaffRegister />} exact />
+        <Route
+          path="/staffregister/update/:staff_id"
+          element={<StaffRegister />}
+          exact
+        />
         <Route path="/stafflogin" element={<StaffLogin />} exact />
         <Route path="/staffdashboard" element={<StaffDashboard />} exact />
 
@@ -102,6 +105,11 @@ function App() {
           exact
         />
         <Route path="/listuniversity" element={<ListUniversity />} exact />
+        <Route
+          path="/viewuniversity/:university_id"
+          element={<ViewUniversity />}
+          exact
+        />
 
         {/* college */}
 

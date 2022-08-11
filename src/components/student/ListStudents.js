@@ -31,6 +31,15 @@ const ListStudents = () => {
     }
   };
 
+  const approveStudent = (email_id) => {
+    // if (window.confirm("Are you sure want to delete this student data?")) {
+    // console.log(college_id);
+    axios.post(`http://localhost:5000/api/send-email/${email_id}`);
+    // toast.success("Email sent sucessfully");
+    // setTimeout(() => loadData(), 500);
+    // }
+  };
+
   return (
     <StaffLayout>
       <div className="container mt-3" style={{ marginLeft: "270px" }}>
@@ -86,6 +95,13 @@ const ListStudents = () => {
                         onClick={() => deleteStudent(uni.register_no)}
                       >
                         Delete
+                      </button>
+                      <button
+                        // type="submit"
+                        className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                        onClick={() => approveStudent(uni.email_id)}
+                      >
+                        Approve
                       </button>
                     </td>
                   </tr>

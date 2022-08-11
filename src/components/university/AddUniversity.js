@@ -16,7 +16,7 @@ const EditUniversity = () => {
   const { university_id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/put/${university_id}`).then((resp) => {
+    axios.get(`http://localhost:5000/api/get/${university_id}`).then((resp) => {
       setState({ ...resp.data[0] });
     });
   }, [university_id]);
@@ -26,19 +26,35 @@ const EditUniversity = () => {
     if (!university_name || !university_email) {
       toast.error("please enter the values in input");
     } else {
-      axios
-        .post("http://localhost:5000/api/post", {
-          university_name,
-          university_email,
-        })
-        .then(() => {
-          setState({ university_name: "", university_email: "" });
-        })
-        .catch((err) => {
-          toast.error(err.response.data);
-        });
-      toast.success("data added sucessfully");
-      setTimeout(() => navigate("/listuniversity"), 500);
+      if (!university_id) {
+        axios
+          .post("http://localhost:5000/api/post", {
+            university_name,
+            university_email,
+          })
+          .then(() => {
+            setState({ university_name: "", university_email: "" });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
+          });
+        toast.success("data added sucessfully");
+        setTimeout(() => navigate("/listuniversity"), 500);
+      } else {
+        axios
+          .put(`http://localhost:5000/api/update/${university_id}`, {
+            university_name,
+            university_email,
+          })
+          .then(() => {
+            setState({ university_name: "", university_email: "" });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
+          });
+        toast.success("University updated sucessfully");
+        setTimeout(() => navigate("/listuniversity"), 500);
+      }
     }
   };
 
@@ -84,18 +100,7 @@ const EditUniversity = () => {
           <form onSubmit={handleSubmit} className="mt-8 space-y-6" action="#">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                {/* <input
-                  type="text"
-                  name="university_id"
-                  id="first-name"
-                  autoComplete="given-name"
-                  placeholder="enter university id"
-                  value={university_id}
-                  onChange={(e) => handleChange(e)}
-                  className=" mt-5 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                /> */}
-              </div>
+              <div></div>
               <div>
                 <input
                   type="text"
