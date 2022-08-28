@@ -23,20 +23,29 @@ const ListActivity = () => {
   }, []);
 
   const deleteUniversity = (college_id) => {
-    if (window.confirm("Are you sure want to delete this university?")) {
+    if (window.confirm("Are you sure want to delete this activity?")) {
       console.log(college_id);
       axios.delete(`http://localhost:5000/api/remove/${college_id}`);
-      toast.success("contact deleted sucessfully");
+      toast.success("activity deleted sucessfully");
       setTimeout(() => loadData(), 500);
     }
   };
   return (
     <StaffLayout>
-      <div className="container mt-3 " style={{ marginLeft: "270px" }}>
+      <div className="container mt-3 " style={{ marginLeft: "300px" }}>
         <div>
           <button id="menu-button" aria-expanded="true" aria-haspopup="true">
             <h4 className="mb-4">Details of Activities</h4>
           </button>
+          <br />
+          <Link to="/addactivity">
+            <button
+              // type="submit"
+              className=" justify-center inline-block mt-2 mb-3 py-1 px-2 mr-2 h-10 w-1/6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              ADD ACTIVITY
+            </button>
+          </Link>
 
           <Table>
             <thead>
@@ -47,7 +56,6 @@ const ListActivity = () => {
                 <th>Date</th>
                 <th>Total present</th>
                 <th>Report</th>
-                <th>Image</th>
                 <th>Operations</th>
               </tr>
             </thead>
@@ -65,22 +73,7 @@ const ListActivity = () => {
                     <img src={uni.image} />
                   </td> */}
                     <td className="d-flex">
-                      <Link to="/editstaff">
-                        <button
-                          // type="submit"
-                          className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                          Edit
-                        </button>
-                      </Link>
                       <button
-                        // type="submit"
-                        className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                      >
-                        View
-                      </button>
-                      <button
-                        // type="submit"
                         className=" justify-center py-1 px-2 mr-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                         onClick={() => deleteUniversity(uni.college_id)}
                       >

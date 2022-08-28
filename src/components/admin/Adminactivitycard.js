@@ -1,10 +1,10 @@
 import React from "react";
-import StudentLayout from "../layout/studentlayout/StudentLayout";
+import Layout from "../layout/Layout";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Activitycard = () => {
+const AdminActivitycard = () => {
   const [data, setData] = useState([]);
 
   const loadData = async () => {
@@ -20,7 +20,7 @@ const Activitycard = () => {
   console.log(data.image);
   return (
     <>
-      <StudentLayout>
+      <Layout>
         <div className="" style={{ marginLeft: "270px" }}>
           <div className="container  mt-4 mx-auto grid grid-cols-3 gap-6">
             {data.map((uni, index) => {
@@ -55,9 +55,9 @@ const Activitycard = () => {
             })}
           </div>
         </div>
-      </StudentLayout>
+      </Layout>
     </>
   );
 };
 
-export default Activitycard;
+export default AdminActivitycard;

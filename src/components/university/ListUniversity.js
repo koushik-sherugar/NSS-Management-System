@@ -38,7 +38,15 @@ const ListUniversity = () => {
           <button id="menu-button" aria-expanded="true" aria-haspopup="true">
             <h4 className="mb-4">Details of University</h4>
           </button>
-
+          <br />
+          <Link to="/adduniversity">
+            <button
+              // type="submit"
+              className=" justify-center inline-block mt-2 mb-3 py-1 px-2 mr-2 h-10 w-1/6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              ADD UNIVERSITY
+            </button>
+          </Link>
           <Table>
             <thead>
               <tr>

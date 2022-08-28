@@ -18,36 +18,72 @@ const AddActivity = () => {
     state;
 
   const navigate = useNavigate();
+  const { activity_id } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/getactivity/${activity_id}`)
+      .then((resp) => {
+        setState({ ...resp.data[0] });
+      });
+  }, [activity_id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!college_id || !activity_name) {
       toast.error("please enter the values in input");
     } else {
-      axios
-        .post("http://localhost:5000/api/addactivity", {
-          college_id,
-          activity_name,
-          date,
-          total_present,
-          report,
-          image,
-        })
-        .then(() => {
-          setState({
-            college_id: "",
-            activity_name: "",
-            date: "",
-            total_present: "",
-            report: "",
-            image: "",
+      if (!activity_id) {
+        axios
+          .post("http://localhost:5000/api/addactivity", {
+            college_id,
+            activity_name,
+            date,
+            total_present,
+            report,
+            image,
+          })
+          .then(() => {
+            setState({
+              college_id: "",
+              activity_name: "",
+              date: "",
+              total_present: "",
+              report: "",
+              image: "",
+            });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
           });
-        })
-        .catch((err) => {
-          toast.error(err.response.data);
-        });
-      toast.success("data added sucessfully");
-      // setTimeout(() => navigate("/listuniversity"), 500);
+        toast.success("activity added sucessfully");
+        setTimeout(() => navigate("/listactivity"), 500);
+      } else {
+        axios
+          .put(`http://localhost:5000/api/updateactivity/${activity_id}`, {
+            college_id,
+            activity_name,
+            date,
+            total_present,
+            report,
+            image,
+          })
+          .then(() => {
+            setState({
+              college_id: "",
+              activity_name: "",
+              date: "",
+              total_present: "",
+              report: "",
+              image: "",
+            });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
+          });
+        toast.success("activity updated sucessfully");
+        setTimeout(() => navigate("/listactivity"), 500);
+      }
     }
   };
 

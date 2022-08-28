@@ -37,17 +37,16 @@ const StaffLogin = () => {
       })
       .then((res) => {
         // alert(res.data.message);
-        // console.log("fonrtend", res);
+        console.log("fonrtend", res.data[0].staff_id);
+        // var staffid= res.data[0].staff_id
+
         if (res.data.error) {
           toast.error("No user found");
-          // console.log("error", res.data.error);
         } else {
           toast.success("Log in sucessfull");
-          navigate("/liststudents");
-          // console.log(first)
+          navigate("/liststudents/");
+          // navigate(`/liststudents/${res.data.staff_id}`);
         }
-        // setLoginStaff(res.data.staff);
-        // history.push("/");
       });
   };
 
@@ -56,10 +55,7 @@ const StaffLogin = () => {
       <Navbar />
       <div className="w-full bg-grey-lightest bg-gray-50 pt-5">
         <div className="container mx-auto py-8">
-          <form
-            // onSubmit={handleSubmit}
-            className="w-5/6 lg:w-1/2 mx-auto bg-white rounded shadow"
-          >
+          <form className="w-5/6 lg:w-1/2 mx-auto bg-white rounded shadow">
             <div className="py-4 px-8 text-indigo-700 text-center text-xl border-b border-grey-lighter">
               <div className="flex justify-center">
                 <svg
@@ -94,6 +90,7 @@ const StaffLogin = () => {
                     name="college_id"
                     value={staff.college_id}
                     onChange={handleChange}
+                    required
                     placeholder="enter college id"
                   />
                 </div>
@@ -111,6 +108,7 @@ const StaffLogin = () => {
                     onChange={handleChange}
                     name="staff_name"
                     type="text"
+                    required
                     placeholder="enter name"
                   />
                 </div>

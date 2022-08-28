@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import logo from "../assets/Nsslogo.jpeg";
+import logo from "../assets/images/Nsslogo.jpeg";
 import {
   BookmarkAltIcon,
   CalendarIcon,

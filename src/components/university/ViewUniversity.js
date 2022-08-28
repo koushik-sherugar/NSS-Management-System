@@ -149,8 +149,7 @@ const ViewUniversity = () => {
                       University Email {university.university_email}
                     </div>
                     <div className="mb-2 text-blueGray-600">
-                      <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                      University of Computer Science
+                      {/* University of Computer Science */}
                     </div>
                   </div>
                   <div className="mt-10 py-10 border-t border-blueGray-200 text-center">

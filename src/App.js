@@ -17,8 +17,8 @@ import StudentLogin from "./components/student/StudentLogin";
 import ListStudents from "./components/student/ListStudents";
 import EditStudent from "./components/student/EditStudent";
 import DashboardStudent from "./components/student/DashboardStudent";
-
-import Admin from "./pages/Admin";
+import ViewStudent from "./components/student/ViewStudent";
+// import Admin from "./pages/Admin";
 import Footer from "./components/layout/Footer";
 
 import ListStaff from "./components/staff/ListStaff";
@@ -27,7 +27,8 @@ import ListStaff from "./components/staff/ListStaff";
 import StaffRegister from "./components/staff/StaffRegister";
 import StaffLogin from "./components/staff/StaffLogin";
 import StaffDashboard from "./components/layout/stafflayout/StaffDashboard";
-
+import ViewStaff from "./components/staff/ViewStaff";
+import StaffChart from "./components/staff/StaffChart";
 // university
 import ListUniversity from "./components/university/ListUniversity";
 import AddUniversity from "./components/university/AddUniversity";
@@ -37,10 +38,12 @@ import ViewUniversity from "./components/university/ViewUniversity";
 import AddActivity from "./components/activity/AddActivity";
 import ListActivity from "./components/activity/ListActivity";
 import ActivityCard from "./components/activity/ActivityCard";
+import AdminActivitycard from "./components/admin/Adminactivitycard";
 
 // university
 import ListCollege from "./components/college/ListCollege";
 import AddCollege from "./components/college/AddCollege";
+import ViewCollege from "./components/college/ViewCollege";
 // import EditCollege from "./components/college/EditCollege";
 
 //admin
@@ -70,7 +73,16 @@ function App() {
         <Route path="/liststudents" element={<ListStudents />} exact />
         <Route path="/editstudent" element={<EditStudent />} exact />
         <Route path="/dashboardstudent" element={<DashboardStudent />} exact />
-
+        <Route
+          path="/viewstudent/:student_id"
+          element={<ViewStudent />}
+          exact
+        />
+        <Route
+          path="/studentregister/update/:student_id"
+          element={<StudentRegister />}
+          exact
+        />
         <Route path="/redirect" element={<Redirect />} exact />
 
         <Route path="/sendmail" element={<SendMail />} exact />
@@ -83,7 +95,7 @@ function App() {
           exact
         /> */}
 
-        <Route path="/admin" element={<Admin />} exact />
+        {/* <Route path="/admin" element={<Admin />} exact /> */}
         <Route path="/adminlogin" element={<AdminLogin />} exact />
         <Route path="/chart" element={<Chart />} exact />
 
@@ -95,7 +107,13 @@ function App() {
           exact
         />
         <Route path="/stafflogin" element={<StaffLogin />} exact />
-        <Route path="/staffdashboard" element={<StaffDashboard />} exact />
+        <Route
+          path="/staffdashboard/:staffid"
+          element={<StaffDashboard />}
+          exact
+        />
+        <Route path="/viewstaff/:staff_id" element={<ViewStaff />} exact />
+        <Route path="/staffchart" element={<StaffChart />} exact />
 
         {/* university */}
         <Route path="/adduniversity" element={<AddUniversity />} exact />
@@ -113,14 +131,28 @@ function App() {
 
         {/* college */}
 
-        <Route path="/addcollege/create" element={<AddCollege />} exact />
+        <Route path="/addcollege" element={<AddCollege />} exact />
         <Route path="/listcollege" element={<ListCollege />} exact />
-        {/* <Route path="/editcollege/:id/edit" element={<EditCollege />} exact /> */}
+        <Route
+          path="/addcollege/update/:college_id"
+          element={<AddCollege />}
+          exact
+        />
+        <Route
+          path="/viewcollege/:college_id"
+          element={<ViewCollege />}
+          exact
+        />
 
         {/* activity */}
         <Route path="/addactivity" element={<AddActivity />} exact />
         <Route path="/listactivity" element={<ListActivity />} exact />
         <Route path="/activitycard" element={<ActivityCard />} exact />
+        <Route
+          path="/admin-activitycard"
+          element={<AdminActivitycard />}
+          exact
+        />
       </Routes>
       <Footer />
     </div>

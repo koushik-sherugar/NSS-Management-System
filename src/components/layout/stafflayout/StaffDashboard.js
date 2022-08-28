@@ -1,7 +1,32 @@
 import React, { Children } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
+import { useState, useEffect } from "react";
+import axios from "axios";
 const StaffDashboard = () => {
+  const [staffName, setStaffName] = useState([]);
+
+  const staff = async () => {
+    // const response = await axios
+    //   .post("http://localhost:5000/api/stafflogin")
+    //   .then((res) => {
+    //     // alert(res.data.message);
+    //     console.log("fonrtend", res);
+    //     if (res.data.error) {
+    //       // toast.error("No user found");
+    //       console.log("error", res.data);
+    //     } else {
+    //       // toast.success("Log in sucessfull");
+    //       // navigate("/liststudents");
+    //     }
+    //   });
+    // setStaffName(response.data.number_of_activities);
+    // console.log("respose test", response);
+  };
+  // useEffect(() => {
+  //   staff();
+  // });
+
   return (
     <div>
       <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
@@ -13,10 +38,15 @@ const StaffDashboard = () => {
                 className="w-32"
                 alt="tailus logo"
               />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z" clip-rule="evenodd" />
+  <path d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z" />
+</svg>
+
             </a>
           </div> */}
 
-          <div className="mt-8 text-center">
+          <div className="mt-3 text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
@@ -35,23 +65,27 @@ const StaffDashboard = () => {
               alt=""
               className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
             /> */}
-            <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
+            <h5 className="hidden mt-2 text-xl font-semibold text-gray-600 lg:block">
               Staff name
             </h5>
             <span className="hidden text-gray-400 lg:block">STAFF</span>
           </div>
 
-          <ul className="space-y-2 tracking-wide mt-8">
+          <ul className="space-y-2 tracking-wide mt-8 border-t">
             <li>
-              <a
-                href="#"
+              <Link
+                to="/staffchart"
                 aria-label="dashboard"
-                className="relative px-4 py-3 flex items-center space-x-4 no-underline rounded-xl text-white bg-gradient-to-r from-sky-600 to-cyan-400"
+                className="relative px-4 py-3 flex items-center space-x-4 no-underline rounded-xl text-white "
               >
-                <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
+                <svg
+                  className="-ml-1 h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
                   <path
                     d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
-                    className="fill-current text-cyan-400 dark:fill-slate-600"
+                    className="fill-current group-hover:text-cyan-400 dark:fill-slate-600"
                   ></path>
                   <path
                     d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
@@ -62,12 +96,14 @@ const StaffDashboard = () => {
                     className="fill-current group-hover:text-sky-300"
                   ></path>
                 </svg>
-                <span className="-mr-1 font-medium">Statistics</span>
-              </a>
+                <span className="-mr-1 font-medium text-gray-500">
+                  Statistics
+                </span>
+              </Link>
             </li>
             <li>
               <NavLink
-                to="/listuniversity"
+                to="/liststudents"
                 className="px-4 py-3 flex items-center space-x-4  no-underline rounded-md text-gray-600 group"
               >
                 <svg
@@ -87,13 +123,13 @@ const StaffDashboard = () => {
                     d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z"
                   />
                 </svg>
-                <span className="group-hover:text-gray-700">University</span>
+                <span className="group-hover:text-gray-700">Students</span>
               </NavLink>
             </li>
 
             <li>
-              <NavLink
-                to="/listcollege"
+              <Link
+                to="/listactivity"
                 className="px-4 py-3 flex items-center space-x-4  no-underline rounded-md text-gray-600 group"
               >
                 <svg
@@ -113,8 +149,8 @@ const StaffDashboard = () => {
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span className="group-hover:text-gray-700">College</span>
-              </NavLink>
+                <span className="group-hover:text-gray-700">Activities</span>
+              </Link>
             </li>
           </ul>
         </div>
@@ -124,25 +160,27 @@ const StaffDashboard = () => {
      items-end border-t ml-3
      "
         >
-          <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className=" h-6 w-6 mb-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-            <span className="group-hover:text-gray-700 text-red-700 text-xl mb-3 ">
-              Logout
-            </span>
-          </button>
+          <Link to="/" className="no-underline">
+            <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className=" h-6 w-6 mb-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+              <span className="group-hover:text-gray-700 text-red-700 text-xl mb-3 ">
+                Logout
+              </span>
+            </button>
+          </Link>
         </div>
       </aside>
       <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">

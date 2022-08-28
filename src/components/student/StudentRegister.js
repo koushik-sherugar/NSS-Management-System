@@ -56,69 +56,135 @@ export default function StudentRegister() {
   } = state;
 
   const navigate = useNavigate();
-  // const { register_no } = useParams();
+  const { student_id } = useParams();
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/getstudent/${student_id}`)
+      .then((resp) => {
+        setState({ ...resp.data[0] });
+      });
+  }, [student_id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!first_name || !register_no) {
       toast.error("please enter the values in input");
     } else {
-      axios
-        .post("http://localhost:5000/api/studentregister", {
-          first_name,
-          last_name,
-          parent_name,
-          aadhar_no,
-          email_id,
-          gender,
-          blood_group,
-          dob,
-          mob_no,
-          category,
-          street_address,
-          city,
-          postal_code,
-          state_name,
-          university_name,
-          college_name,
-          course,
-          university_id,
-          register_no,
-          college_id,
-          interests,
-          achievements,
-        })
-        .then(() => {
-          setState({
-            first_name: "",
-            last_name: "",
-            parent_name: "",
-            aadhar_no: "",
-            email_id: "",
-            gender: "",
-            blood_group: "",
-            dob: "",
-            mob_no: "",
-            category: "",
-            street_address: "",
-            city: "",
-            postal_code: "",
-            state_name: "",
-            university_name: "",
-            college_name: "",
-            course: "",
-            university_id: "",
-            register_no: "",
-            college_id: "",
-            interests: "",
-            achievements: "",
+      if (!student_id) {
+        axios
+          .post("http://localhost:5000/api/studentregister", {
+            first_name,
+            last_name,
+            parent_name,
+            aadhar_no,
+            email_id,
+            gender,
+            blood_group,
+            dob,
+            mob_no,
+            category,
+            street_address,
+            city,
+            postal_code,
+            state_name,
+            university_name,
+            college_name,
+            course,
+            university_id,
+            register_no,
+            college_id,
+            interests,
+            achievements,
+          })
+          .then(() => {
+            setState({
+              first_name: "",
+              last_name: "",
+              parent_name: "",
+              aadhar_no: "",
+              email_id: "",
+              gender: "",
+              blood_group: "",
+              dob: "",
+              mob_no: "",
+              category: "",
+              street_address: "",
+              city: "",
+              postal_code: "",
+              state_name: "",
+              university_name: "",
+              college_name: "",
+              course: "",
+              university_id: "",
+              register_no: "",
+              college_id: "",
+              interests: "",
+              achievements: "",
+            });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
           });
-        })
-        .catch((err) => {
-          toast.error(err.response.data);
-        });
-      toast.success("data added sucessfully");
-      // setTimeout(() => navigate("/studentdashboard"), 500);
+        toast.success("data added sucessfully");
+        setTimeout(() => navigate("/studentdashboard"), 500);
+      } else {
+        axios
+          .put(`http://localhost:5000/api/updatestudent/${student_id}`, {
+            first_name,
+            last_name,
+            parent_name,
+            aadhar_no,
+            email_id,
+            gender,
+            blood_group,
+            dob,
+            mob_no,
+            category,
+            street_address,
+            city,
+            postal_code,
+            state_name,
+            university_name,
+            college_name,
+            course,
+            university_id,
+            register_no,
+            college_id,
+            interests,
+            achievements,
+          })
+          .then(() => {
+            setState({
+              first_name: "",
+              last_name: "",
+              parent_name: "",
+              aadhar_no: "",
+              email_id: "",
+              gender: "",
+              blood_group: "",
+              dob: "",
+              mob_no: "",
+              category: "",
+              street_address: "",
+              city: "",
+              postal_code: "",
+              state_name: "",
+              university_name: "",
+              college_name: "",
+              course: "",
+              university_id: "",
+              register_no: "",
+              college_id: "",
+              interests: "",
+              achievements: "",
+            });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
+          });
+        toast.success("data added sucessfully");
+        setTimeout(() => navigate("/activitycard"), 500);
+      }
     }
   };
 

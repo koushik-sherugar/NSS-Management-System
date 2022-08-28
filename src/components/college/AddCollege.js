@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import logo from "../../assets/images/Nsslogo.jpeg";
 
 const initialState = {
   university_id: "",
@@ -23,7 +24,15 @@ const Addcollege = () => {
   } = state;
 
   const navigate = useNavigate();
-  // const { id } = useParams();
+  const { college_id } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/getcollege/${college_id}`)
+      .then((resp) => {
+        setState({ ...resp.data[0] });
+      });
+  }, [college_id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,28 +44,53 @@ const Addcollege = () => {
     ) {
       toast.error("please enter the values in input");
     } else {
-      axios
-        .post("http://localhost:5000/api/addcollege", {
-          university_id,
-          college_name,
-          college_email,
-          college_contact_no,
-          college_address,
-        })
-        .then(() => {
-          setState({
-            university_id: "",
-            college_name: "",
-            college_email: "",
-            college_contact_no: "",
-            college_address: "",
+      if (!college_id) {
+        axios
+          .post("http://localhost:5000/api/addcollege", {
+            university_id,
+            college_name,
+            college_email,
+            college_contact_no,
+            college_address,
+          })
+          .then(() => {
+            setState({
+              university_id: "",
+              college_name: "",
+              college_email: "",
+              college_contact_no: "",
+              college_address: "",
+            });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
           });
-        })
-        .catch((err) => {
-          toast.error(err.response.data);
-        });
-      toast.success("data added sucessfully");
-      // setTimeout(() => navigate("/listcollege"), 500);
+        toast.success("college added sucessfully");
+        setTimeout(() => navigate("/listcollege"), 500);
+      } else {
+        axios
+          .put(`http://localhost:5000/api/updatecollege/${college_id}`, {
+            university_id,
+            college_name,
+            college_email,
+            college_contact_no,
+            college_address,
+          })
+          .then(() => {
+            setState({
+              university_id: "",
+              college_name: "",
+              college_email: "",
+              college_contact_no: "",
+              college_address: "",
+            });
+          })
+          .catch((err) => {
+            toast.error(err.response.data);
+          });
+        toast.success("University updated sucessfully");
+        setTimeout(() => navigate("/listcollege"), 500);
+      }
     }
   };
 
@@ -67,12 +101,12 @@ const Addcollege = () => {
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+        <div className="max-w-md w-full shadow-lg space-y-8 p-6">
           <div>
-            {/* <img className="mx-auto h-16 w-auto" src={logo} alt="Nss logo" /> */}
+            <img className="mx-auto h-16 w-auto" src={logo} alt="Nss logo" />
 
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Add College
+              {college_id ? "Update college " : "Add College"}
             </h2>
             {/* <p className="mt-2 text-center text-sm text-gray-600">
               Or{" "}
@@ -91,7 +125,7 @@ const Addcollege = () => {
             method="POST"
           >
             <input type="hidden" name="remember" defaultValue="true" />
-            <div className="rounded-md shadow-sm -space-y-px">
+            <div className="rounded-md  -space-y-px">
               <div>
                 <input
                   type="number"
@@ -161,12 +195,11 @@ const Addcollege = () => {
             </div>
 
             <div>
-              <button
+              <input
                 type="submit"
+                value={college_id ? "Update college Details" : "Add College"}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Add college
-              </button>
+              />
             </div>
           </form>
         </div>

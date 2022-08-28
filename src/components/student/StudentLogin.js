@@ -1,4 +1,4 @@
-import logo from "../../assets/Nsslogo.jpeg";
+import logo from "../../assets/images/Nsslogo.jpeg";
 import Navbar from "../../pages/Navbar";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";

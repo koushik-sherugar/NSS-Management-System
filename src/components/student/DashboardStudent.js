@@ -1,6 +1,7 @@
 import React from "react";
 import ListStudent from "./ListStudents";
 import Activitycard from "../activity/ActivityCard";
+import ViewStudent from "../student/ViewStudent";
 import { Link } from "react-router-dom";
 
 const DashboardStudent = () => {
@@ -948,7 +949,7 @@ const DashboardStudent = () => {
           </div>
         </div> */}
 
-        <ListStudent />
+        <ViewStudent />
       </div>
     </div>
   );

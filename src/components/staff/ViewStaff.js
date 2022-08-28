@@ -1,23 +1,21 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import StudentLayout from "../layout/studentlayout/StudentLayout";
+import Layout from "../layout/Layout";
 // import bgimg from "../../assets/images/detailsbg.jpg";
-const ViewStudent = () => {
-  const [student, setstudent] = useState({});
-  const { student_id } = useParams();
+const ViewStaff = () => {
+  const [staff, setStaff] = useState({});
+  const { staff_id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/getstudent/${student_id}`)
-      .then((resp) => {
-        setstudent({ ...resp.data[0] });
-      });
-  }, [student_id]);
+    axios.get(`http://localhost:5000/api/getstaff/${staff_id}`).then((resp) => {
+      setStaff({ ...resp.data[0] });
+    });
+  }, [staff_id]);
 
   return (
     <>
-      <StudentLayout>
+      <Layout>
         <main className=" profile-page  ml-72">
           <section className="relative block h-500-px">
             <image
@@ -82,16 +80,7 @@ const ViewStudent = () => {
                       </svg> */}
                       </div>
                     </div>
-                    {/* <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center"> */}
-                    {/* <div className="py-6 px-3 mt-32 sm:mt-0">
-                      <button
-                        className="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-                        type="button"
-                      >
-                        Connect
-                      </button>
-                    </div> */}
-                    {/* </div> */}
+
                     <div className="w-full justify-center text-center  px-4 lg:order-1">
                       <div className="flex justify-center py-4 lg:pt-4 pt-8">
                         <div className="p-3 text-center">
@@ -100,18 +89,14 @@ const ViewStudent = () => {
                             Role :{" "}
                             <p className="inline text-indigo-700">STAFF</p>
                           </span> */}
-                          <h1 className=" text-indigo-700">STUDENT DETAILS</h1>
-
-                          {/* <span className="text-sm text-blueGray-500">
-                          Has the power to access and modify student details Has the power to access and modify student details
-                        </span> */}
+                          <h1 className=" text-indigo-700">STAFF DETAILS</h1>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="text-center mt-8">
                     <h3 className="text-4xl font-semibold leading-normal  text-blueGray-700 mb-2">
-                      student Name: {student.first_name}
+                      Staff Name: {staff.staff_name}
                     </h3>
                     <div className="text-lg leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                       {/* <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i> */}
@@ -129,8 +114,28 @@ const ViewStudent = () => {
                           d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
                         />
                       </svg>
-                      Register no: {student.register_no}
+                      Staff id: {staff.staff_id}
                     </div>
+
+                    <div className="text-lg leading-normal mt-1 mb-2 text-blueGray-400 font-bold uppercase">
+                      {/* <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i> */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class=" inline-block mr-2 text-lg  text-blueGray-400 h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                        />
+                      </svg>
+                      college id: {staff.college_id}
+                    </div>
+
                     <div className="mb-2 text-blueGray-600 mt-10">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -146,78 +151,26 @@ const ViewStudent = () => {
                           d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"
                         />
                       </svg>
-                      Student Email: {student.email_id}
-                    </div>
-                    <div className="mb-2 text-blueGray-600 mt-10">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class=" inline-block mr-2 text-lg  text-blueGray-400 h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
-                        />
-                      </svg>
-                      College name: {student.college}
+                      staff Email: {staff.staff_email}
                     </div>
                   </div>
                   <div className="w-full border-t border-blueGray-200 px-4">
                     <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      Course: {student.course}
+                      Trained : {staff.trained}
                     </p>
                     <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      Parents Name: {student.parent_name}
+                      Training Center: {staff.training_center}
                     </p>
+
                     <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      Email id: {student.email_id}
-                      <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                        Mobile no: {student.mob_no}
-                      </p>
-                    </p>{" "}
-                    <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      Gender: {student.gender}
-                    </p>{" "}
-                    <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      Blood Group: {student.blood_group}
-                    </p>{" "}
-                    <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      Date of birth: {student.gender}
-                    </p>
-                    <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      City: {student.city}
-                    </p>
-                    <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      College id: {student.college_id}
-                    </p>
-                    <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      University id: {student.university_id}
-                    </p>
-                    <p className="mb-4 text-lg mt-2 leading-relaxed text-blueGray-700">
-                      street address: {student.street_address}
+                      Trained Year: {staff.trained_year}
                     </p>
                   </div>
                   <div className=" py-10 border-t border-blueGray-200 text-center">
                     <div className="flex flex-wrap justify-center">
                       <div className="w-full lg:w-9/12 px-4">
-                        <p className="text-left text-xl text-gray-900">
-                          Interests:
-                        </p>
-                        <p className="mb-4  mt-0 text-lg text-blueGray-700">
-                          {student.interests}
-                        </p>
-                        <p className="text-left mt-2 text-xl text-gray-900">
-                          Achievements:
-                        </p>
-                        <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                          {student.achievements}
-                        </p>
                         <a
-                          href="/liststudents"
+                          href="/liststaff"
                           className="font-normal text-indigo-700 "
                         >
                           Go Back
@@ -230,8 +183,8 @@ const ViewStudent = () => {
             </div>
           </section>
         </main>
-      </StudentLayout>
+      </Layout>
     </>
   );
 };
-export default ViewStudent;
+export default ViewStaff;

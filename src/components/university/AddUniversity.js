@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import logo from "../../assets/images/Nsslogo.jpeg";
 const initialState = {
   university_name: "",
   university_email: "",
@@ -64,7 +64,7 @@ const EditUniversity = () => {
   };
   return (
     <>
-      <Link
+      {/* <Link
         to="/adminwindow"
         className="flex mt-3 ml-2 no-underline text-black"
       >
@@ -77,14 +77,14 @@ const EditUniversity = () => {
           <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
         </svg>
         <h1>Back</h1>
-      </Link>
+      </Link> */}
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+        <div className="max-w-md w-full space-y-8 shadow-lg  p-6">
           <div>
-            {/* <img className="mx-auto h-16 w-auto" src={logo} alt="Nss logo" /> */}
+            <img className="mx-auto h-16 w-auto" src={logo} alt="Nss logo" />
 
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Add university
+              University
             </h2>
             {/* <p className="mt-2 text-center text-sm text-gray-600">
               Or{" "}

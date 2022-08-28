@@ -1,14 +1,8 @@
-import React, { Children } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
 // import Chart from "../Chart";
-// const SidebarData = [
-//   {
-//     title: "Home",
-//     path: "/",
-//     icon: <FaIcons.FaHome />,
-//   },
-// ];
+
 const Adminwindow = () => {
   return (
     <div>
@@ -24,7 +18,7 @@ const Adminwindow = () => {
             </a>
           </div> */}
 
-          <div className="mt-8 text-center">
+          <div className="mt-1 text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
@@ -43,18 +37,19 @@ const Adminwindow = () => {
               alt=""
               className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
             /> */}
-            <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-              Staff name
+            <h5 className="hidden text-xl font-semibold text-gray-600 lg:block">
+              Admin name
             </h5>
             <span className="hidden text-gray-400 lg:block">Admin</span>
           </div>
 
-          <ul className="space-y-2 tracking-wide mt-8">
+          <ul className="space-y-2 tracking-wide mt-2">
             <li>
-              <a
-                href="#"
+              <Link
+                to="/chart"
                 aria-label="dashboard"
-                className="relative px-4 py-3 flex items-center space-x-4 no-underline rounded-xl text-white bg-gradient-to-r from-sky-600 to-cyan-400"
+                // className="relative px-4 py-3 flex items-center space-x-4 no-underline rounded-xl text-white bg-gradient-to-r from-sky-600 to-cyan-400"
+                className="relative px-4 py-3 flex items-center space-x-4 no-underline rounded-xl text-gray-600  "
               >
                 <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
                   <path
@@ -70,8 +65,10 @@ const Adminwindow = () => {
                     className="fill-current group-hover:text-sky-300"
                   ></path>
                 </svg>
-                <span className="-mr-1 font-medium">Statistics</span>
-              </a>
+                <span className="-mr-1 font-medium hover:text-gray-700">
+                  Statistics
+                </span>
+              </Link>
             </li>
             <li>
               <NavLink
@@ -124,6 +121,31 @@ const Adminwindow = () => {
                 <span className="group-hover:text-gray-700">College</span>
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/admin-activitycard"
+                className="px-4 py-3 flex items-center space-x-4  no-underline rounded-md text-gray-600 group"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 "
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    className="fill-current text-gray-300 group-hover:text-cyan-300"
+                    d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"
+                  />
+                  <path
+                    className="fill-current text-gray-600 group-hover:text-cyan-600"
+                    fill-rule="evenodd"
+                    d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span className="group-hover:text-gray-700">Activity</span>
+              </NavLink>
+            </li>
           </ul>
         </div>
 
@@ -132,25 +154,27 @@ const Adminwindow = () => {
      items-end border-t ml-3
      "
         >
-          <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className=" h-6 w-6 mb-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-            <span className="group-hover:text-gray-700 text-red-700 text-xl mb-3 ">
-              Logout
-            </span>
-          </button>
+          <Link to="/" className="no-underline">
+            <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className=" h-6 w-6 mb-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+              <span className="group-hover:text-gray-700 text-red-700 text-xl mb-3 ">
+                Logout
+              </span>
+            </button>
+          </Link>
         </div>
       </aside>
       <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">

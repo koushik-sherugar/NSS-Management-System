@@ -16,6 +16,7 @@ const initialState = {
 };
 const StaffRegister = () => {
   const [state, setState] = useState(initialState);
+
   const {
     college_id,
     staff_name,
@@ -91,8 +92,8 @@ const StaffRegister = () => {
           .catch((err) => {
             toast.error(err.response.data);
           });
-        toast.success("University updated sucessfully");
-        setTimeout(() => navigate("/listuniversity"), 500);
+        toast.success("Staff updated sucessfully");
+        setTimeout(() => navigate("/liststudents"), 500);
       }
     }
   };

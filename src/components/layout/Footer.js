@@ -97,10 +97,9 @@ const Footer = () => {
               </address>
             </div>
             <div className="px-4 sm:w-1/3 md:w-1/4 mt-4 md:mt-0">
-              <h6 className="font-bold mb-2">Test </h6>
+              <h6 className="font-bold mb-2">About </h6>
               <p className="mb-4 text-sm">
-                sample text blocks for <strong>test</strong>
-                <em>text here</em>
+                sample project for managing nss data
               </p>
             </div>
             {/* <div className="px-4 md:w-1/4 md:ml-auto mt-6 sm:mt-4 md:mt-0">

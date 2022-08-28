@@ -15,39 +15,18 @@ import {
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Layout from "./layout/Layout";
-const colors = [
-  "#1f77b4",
-  "#ff7f0e",
-  "#2ca02c",
-  "#ffef0e",
-  "#FF00Fe",
-  "#00FF00",
-];
-
+import StaffLayout from "../layout/stafflayout/StaffLayout";
+const colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#ffef0e"];
 const data = [
-  { name: "Manglore", colleges: 12 },
-  { name: "Banglore", colleges: 7 },
-  { name: "Dharwad", colleges: 9 },
-  { name: "Hasan", colleges: 3 },
-  { name: "Hubli", colleges: 2 },
-  { name: "Mysore", colleges: 6 },
-];
-
-const sdata = [
-  { uname: "Manglore", staffs: 2 },
-  { uname: "Banglore", staffs: 7 },
-  { uname: "Dharwad", staffs: 3 },
-  { uname: "Hasan", staffs: 3 },
-  { uname: "Hubli", staffs: 2 },
-  { uname: "Mysore", staffs: 3 },
+  { name: "Manglore", users: 20000000 },
+  { name: "Banglore", users: 15000000 },
+  { name: "Dharwad", users: 10000000 },
+  { name: "Hasan", users: 5000000 },
 ];
 
 const Chart = () => {
   const [studentCount, setStudentCount] = useState([]);
   const [staffCount, setStaffCount] = useState([]);
-  const [collegeCount, setCollegeCount] = useState([]);
-  const [universityCount, setUniversityCount] = useState([]);
   const [activityCount, setActivityCount] = useState([]);
 
   const loadData = async () => {
@@ -60,18 +39,6 @@ const Chart = () => {
     setStaffCount(response.data.number_of_staffs);
   };
 
-  const collegeData = async () => {
-    const response = await axios.get("http://localhost:5000/api/countcolleges");
-    setCollegeCount(response.data.number_of_colleges);
-  };
-
-  const universityData = async () => {
-    const response = await axios.get(
-      "http://localhost:5000/api/countuniversities"
-    );
-    setUniversityCount(response.data.number_of_universities);
-  };
-
   const activityData = async () => {
     const response = await axios.get(
       "http://localhost:5000/api/countactivities"
@@ -82,17 +49,15 @@ const Chart = () => {
   useEffect(() => {
     loadData();
     staffData();
-    collegeData();
-    universityData();
     activityData();
   }, []);
 
   return (
-    <Layout>
+    <StaffLayout>
       <div style={{ marginLeft: "270px" }}>
-        {/* <h1 classNameName="text-center mt-2 mb-4">CHART</h1> */}
+        <h1 classNameName="text-center mt-2 ml-5 mb-4">STATISTICS</h1>
 
-        <div className="flex flex-wrap mb-2">
+        <div className="flex flex-wrap mt-5 mb-2">
           <div className="w-full md:w-1/2 xl:w-1/3 pt-3 px-3 md:pr-2">
             <div className="bg-green-600 border rounded shadow p-2">
               <div className="flex flex-row items-center">
@@ -135,37 +100,7 @@ const Chart = () => {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/2 xl:w-1/3 pt-3 px-3 md:pr-2 xl:pr-3 xl:pl-1">
-            <div className="bg-orange-600 border rounded shadow p-2">
-              <div className="flex flex-row items-center">
-                <div className="flex-shrink pl-1 pr-4">
-                  <i className="fas fa-building fa-2x fa-fw fa-inverse"></i>
-                </div>
-                <div className="flex-1 text-right pr-1">
-                  <h5 className="text-white">Total College</h5>
-                  <h3 className="text-white text-3xl">
-                    {collegeCount}
-                    <span className="text-orange-400">
-                      {/* <i className="fas fa-caret-up"></i> */}
-                    </span>
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 xl:w-1/3 pt-3 px-3 md:pl-2 xl:pl-3 xl:pr-2">
-            <div className="bg-purple-600 border rounded shadow p-2">
-              <div className="flex flex-row items-center">
-                <div className="flex-shrink pl-1 pr-4">
-                  <i className="fas fa-landmark fa-2x fa-fw fa-inverse"></i>
-                </div>
-                <div className="flex-1 text-right">
-                  <h5 className="text-white">University</h5>
-                  <h3 className="text-white text-3xl">{universityCount}</h3>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div className="w-full md:w-1/2 xl:w-1/3 pt-3 px-3 md:pr-2 xl:pl-2 xl:pr-3">
             <div className="bg-red-600 border rounded shadow p-2">
               <div className="flex flex-row items-center">
@@ -182,13 +117,11 @@ const Chart = () => {
         </div>
 
         <div classNameName="container align-items-center ">
-          <br />
-          <br />
-          <h5 classNameName=" text-xl mt-6 ml-1">University Registered</h5>
-          <ResponsiveContainer width={500} height={500}>
+          <h5 classNameName=" text-4xl mt-3 ml-1">University Registered</h5>
+          <ResponsiveContainer width={400} height={400}>
             <PieChart classNameName="ml-60">
               <Pie
-                dataKey="colleges"
+                dataKey="users"
                 isAnimationActive={false}
                 data={data}
                 cx={200}
@@ -208,7 +141,7 @@ const Chart = () => {
 
           <hr />
 
-          <h5 classNameName="  mt-3 mb-3 text-4xl">Colleges Registered</h5>
+          <h5 classNameName="  mt-6 mb-3 text-4xl">Colleges Registered</h5>
 
           <BarChart
             width={800}
@@ -232,11 +165,7 @@ const Chart = () => {
             <Tooltip />
             <Legend />
             <CartesianGrid strokeDasharray="3 3" />
-            <Bar
-              dataKey="colleges"
-              fill="#8884d8"
-              background={{ fill: "#eee" }}
-            >
+            <Bar dataKey="users" fill="#8884d8" background={{ fill: "#eee" }}>
               {data.map((entry, index) => (
                 <Cell fill={colors[index % colors.length]} />
               ))}
@@ -244,7 +173,7 @@ const Chart = () => {
           </BarChart>
         </div>
       </div>
-    </Layout>
+    </StaffLayout>
   );
 };
 
