@@ -15,8 +15,8 @@ module.exports = db;
 
 
 
-EMAIL=kaushiksherugar2001@gmail.com
-PASSWORD=Dellinteli3@5thgen
+EMAIL=youremailid@gmail.com
+PASSWORD=enter your email password
 OAUTH_CLIENTID=528294491901-gn6r7v48su8ha3019bbmaidst9n39idt.apps.googleusercontent.com
 OAUTH_CLIENT_SECRET=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
 OAUTH_REFRESH_TOKEN=1//04_qdA6T0V_Z9CgYIARAAGAQSNwF-L9IrS-BsxgP0HNDJWGFOO8jqEOyyuL9GdHTasXKgTR-UjI9vFcRgrnw7Xx9LsQvLuAQsdgo
